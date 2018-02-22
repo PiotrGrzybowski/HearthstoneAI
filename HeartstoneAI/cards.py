@@ -16,6 +16,7 @@ class Minion(CombatCard):
     def __init__(self, name, cost, abilities, attack, health, minion_type):
         super().__init__(name, cost, abilities, attack, health)
         self.minion_type = minion_type
+        self.summoning_sickness = True
 
 
 class Hero(CombatCard):

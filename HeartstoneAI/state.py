@@ -1,5 +1,6 @@
 from HeartstoneAI.cards import Minion
 
+MAX_HAND_SIZE = 10
 
 class Player:
     def __init__(self, hero, hand, deck, board, graveyard):
@@ -8,6 +9,7 @@ class Player:
         self.deck = deck
         self.board = board
         self.graveyard = graveyard
+        self.fatigue = 0
 
     def put_down_card(self, card):
         if isinstance(card, Minion):
@@ -15,9 +17,27 @@ class Player:
         else:
             self.graveyard.append(card)
 
-    def check_card(self, index):
+    def validate_card(self, index):
         if self.board[index].health <= 0:
             self.graveyard.append(self.board.pop(index))
+
+    def draw_card(self):
+        if len(self.hand) < MAX_HAND_SIZE:
+            self.hand.append(self.deck.pop())
+        else:
+            self.graveyard.append(self.deck.pop())
+
+    def apply_fatigue(self, amount=1):
+        self.fatigue += amount
+        self.hero.health -= self.fatigue
+
+    def disable_sickness(self):
+        for minion in self.board:
+            minion.summoning_sickness = False
+
+    @property
+    def is_dead(self):
+        return self.hero.health <= 0
 
 
 class State:
@@ -35,12 +55,31 @@ class State:
     def battle(attacking_card, attacked_card):
         attacking_card.health -= attacked_card.attack
         attacked_card.health -= attacking_card.attack
+        attacking_card.summoning_sickness = True
 
     def attack(self, attacking_index, attacked_index):
         self.battle(self.current_player.board[attacking_index], self.opposite_player.board[attacked_index])
-        self.current_player.check_card(attacking_index)
-        self.opposite_player.check_card(attacked_index)
+        self.current_player.validate_card(attacking_index)
+        self.opposite_player.validate_card(attacked_index)
 
     def attack_hero(self, attacking_index):
         self.battle(self.current_player.board[attacking_index], self.opposite_player.hero)
-        self.current_player.check_card(attacking_index)
+        self.current_player.validate_card(attacking_index)
+
+    def switch_players(self):
+        temp_player = self.current_player
+        self.current_player = self.opposite_player
+        self.opposite_player = temp_player
+
+    def draw_card(self):
+        if self.current_player.deck:
+            self.current_player.draw_card()
+        else:
+            self.current_player.apply_fatigue()
+
+    @property
+    def is_terminal(self):
+        return self.current_player.is_dead or self.opposite_player.is_dead
+
+    def disable_sickness(self):
+        self.current_player.disable_sickness()
