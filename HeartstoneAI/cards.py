@@ -35,7 +35,7 @@ class CardPool:
         self.max_size = max_size
 
     def draw_card(self, index):
-        return self.cards[index]
+        return self.cards.pop(index)
 
     def add_card(self, card):
         self.cards.append(card)
