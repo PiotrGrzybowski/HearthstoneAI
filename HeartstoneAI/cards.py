@@ -33,3 +33,5 @@ class CardPool:
     def __init__(self, cards, max_size):
         self.cards = cards
         self.max_size = max_size
+
+print('pamisio!')
