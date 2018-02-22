@@ -15,7 +15,7 @@ class Player:
         else:
             self.graveyard.append(card)
 
-    def check_card(self, index):
+    def check_card(self, index=None):
         if self.board[index].health <= 0:
             self.graveyard.append(self.board.pop(index))
 
@@ -36,7 +36,10 @@ class State:
         attacking_card.health -= attacked_card.attack
         attacked_card.health -= attacking_card.attack
 
-    def attack(self, attacking_index, attacked_index):
-        self.battle(self.current_player.board[attacking_index], self.opposite_player.board[attacked_index])
+    def attack(self, attacking_index, attacked_index=None):
+        attacked_card = self.current_player.hero if attacked_index is None \
+            else self.opposite_player.board[attacked_index]
+        self.battle(self.current_player.board[attacking_index], attacked_card)
         self.current_player.check_card(attacking_index)
-        self.opposite_player.check_card(attacked_index)
+        if attacked_index is not None:
+            self.opposite_player.check_card(attacked_index)
