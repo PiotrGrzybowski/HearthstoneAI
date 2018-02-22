@@ -27,15 +27,3 @@ class Hero(CombatCard):
 class Spell(Card):
     def __init__(self, name, cost, abilities):
         super().__init__(name, cost, abilities)
-
-
-class CardPool:
-    def __init__(self, cards, max_size):
-        self.cards = cards
-        self.max_size = max_size
-
-    def draw_card(self, index):
-        return self.cards.pop(index)
-
-    def add_card(self, card):
-        self.cards.append(card)

@@ -1,10 +1,10 @@
 class Player:
-    def __init__(self, hero, hand, deck, graveyard, board):
+    def __init__(self, hero, hand, deck, board, graveyard):
         self.hero = hero
         self.hand = hand
         self.deck = deck
-        self.graveyard = graveyard
         self.board = board
+        self.graveyard = graveyard
 
 
 class State:
@@ -12,12 +12,8 @@ class State:
         self.current_player = current_player
         self.opposite_player = opposite_player
 
-
-class Game:
-    def __init__(self, state):
-        self.state = state
-
-    def play_card(self, card):
+    def play_card(self, index):
+        card = self.current_player.hand.pop(index)
         for ability in card.abilities:
-            ability(self.state)
-
+            ability(self)
+        self.current_player.graveyard.append(card)
