@@ -1,3 +1,6 @@
+from HeartstoneAI.cards import Minion
+
+
 class Player:
     def __init__(self, hero, hand, deck, board, graveyard):
         self.hero = hero
@@ -5,6 +8,16 @@ class Player:
         self.deck = deck
         self.board = board
         self.graveyard = graveyard
+
+    def put_down_card(self, card):
+        if isinstance(card, Minion):
+            self.board.append(card)
+        else:
+            self.graveyard.append(card)
+
+    def check_card(self, index):
+        if self.board[index].health <= 0:
+            self.graveyard.append(self.board.pop(index))
 
 
 class State:
@@ -16,4 +29,14 @@ class State:
         card = self.current_player.hand.pop(index)
         for ability in card.abilities:
             ability(self)
-        self.current_player.graveyard.append(card)
+        self.current_player.put_down_card(card)
+
+    @staticmethod
+    def battle(attacking_card, attacked_card):
+        attacking_card.health -= attacked_card.attack
+        attacked_card.health -= attacking_card.attack
+
+    def attack(self, attacking_index, attacked_index):
+        self.battle(self.current_player.board[attacking_index], self.opposite_player.board[attacked_index])
+        self.current_player.check_card(attacking_index)
+        self.opposite_player.check_card(attacked_index)
