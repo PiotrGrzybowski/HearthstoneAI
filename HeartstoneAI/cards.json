@@ -1,0 +1,235 @@
+[
+
+  {
+    "cardId": "CS2_188",
+    "dbfId": "242",
+    "name": "Abusive Sergeant",
+    "cardSet": "Classic",
+    "type": "Minion",
+    "faction": "Alliance",
+    "rarity": "Common",
+    "cost": 1,
+    "attack": 1,
+    "health": 1,
+    "text": "<b>Battlecry:</b> Give a minion +2_Attack this turn.",
+    "flavor": "ADD ME TO YOUR DECK, MAGGOT!",
+    "artist": "Luca Zontini",
+    "collectible": true,
+    "playerClass": "Neutral",
+    "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_188.png",
+    "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_188_premium.gif",
+    "locale": "enUS",
+    "mechanics": [
+      {
+        "name": "Battlecry"
+      }
+    ]
+  },
+  {
+    "cardId": "EX1_008",
+    "dbfId": "757",
+    "name": "Argent Squire",
+    "cardSet": "Classic",
+    "type": "Minion",
+    "faction": "Alliance",
+    "rarity": "Common",
+    "cost": 1,
+    "attack": 1,
+    "health": 1,
+    "text": "<b>Divine Shield</b>",
+    "flavor": "\"I solemnly swear to uphold the Light, purge the world of darkness, and to eat only burritos.\" - The Argent Dawn Oath",
+    "artist": "Zoltan & Gabor",
+    "collectible": true,
+    "playerClass": "Neutral",
+    "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_008.png",
+    "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_008_premium.gif",
+    "locale": "enUS",
+    "mechanics": [
+      {
+        "name": "Divine Shield"
+      }
+    ]
+  },
+  {
+    "cardId": "OG_223",
+    "dbfId": "38749",
+    "name": "Divine Strength",
+    "cardSet": "Whispers of the Old Gods",
+    "type": "Spell",
+    "rarity": "Common",
+    "cost": 1,
+    "text": "Give a minion +1/+2.",
+    "flavor": "Every year a few paladins get disqualified from the Westfall weight lifting championship for using Divine Strength.",
+    "artist": "Eva Wilderman",
+    "collectible": true,
+    "playerClass": "Paladin",
+    "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/OG_223.png",
+    "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/OG_223_premium.gif",
+    "locale": "enUS"
+  },
+  {
+    "cardId": "OG_221",
+    "dbfId": "38740",
+    "name": "Selfless Hero",
+    "cardSet": "Whispers of the Old Gods",
+    "type": "Minion",
+    "rarity": "Rare",
+    "cost": 1,
+    "attack": 2,
+    "health": 1,
+    "text": "<b>Deathrattle:</b> Give a random friendly minion <b>Divine Shield</b>.",
+    "flavor": "\"Don't worry about me… I'll just be here... under these tentacles.\"",
+    "artist": "Rafael Zanchetin",
+    "collectible": true,
+    "playerClass": "Paladin",
+    "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/OG_221.png",
+    "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/OG_221_premium.gif",
+    "locale": "enUS",
+    "mechanics": [
+      {
+        "name": "Divine Shield"
+      },
+      {
+        "name": "Deathrattle"
+      }
+    ]
+  },
+  {
+    "cardId": "EX1_349",
+    "dbfId": "679",
+    "name": "Divine Favor",
+    "cardSet": "Classic",
+    "type": "Spell",
+    "faction": "Neutral",
+    "rarity": "Rare",
+    "cost": 3,
+    "text": "Draw cards until you have as many in hand as your opponent.",
+    "flavor": "This is not just a favor, but a divine one, like helping someone move a couch with a fold out bed!",
+    "artist": "Lucas Graciano",
+    "collectible": true,
+    "playerClass": "Paladin",
+    "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_349.png",
+    "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_349_premium.gif",
+    "locale": "enUS"
+  },
+  {
+    "cardId": "AT_074",
+    "dbfId": "2717",
+    "name": "Seal of Champions",
+    "cardSet": "The Grand Tournament",
+    "type": "Spell",
+    "rarity": "Common",
+    "cost": 3,
+    "text": "Give a minion\\n+3 Attack and <b>Divine Shield</b>.",
+    "flavor": "\"Arf! Arf! Arf!\" - Seal of Champions",
+    "artist": "Jonboy Meyers",
+    "collectible": true,
+    "playerClass": "Paladin",
+    "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/AT_074.png",
+    "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/AT_074_premium.gif",
+    "locale": "enUS",
+    "mechanics": [
+      {
+        "name": "Divine Shield"
+      }
+    ]
+  },
+  {
+    "cardId": "OG_310",
+    "dbfId": "38911",
+    "name": "Steward of Darkshire",
+    "cardSet": "Whispers of the Old Gods",
+    "type": "Minion",
+    "rarity": "Rare",
+    "cost": 3,
+    "attack": 3,
+    "health": 3,
+    "text": "<b>Divine Shield</b>.",
+    "flavor": "Turns out divine shields are way cheaper if you buy in bulk.",
+    "artist": "Phroi Gardner",
+    "collectible": true,
+    "playerClass": "Paladin",
+    "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/OG_310.png",
+    "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/OG_310_premium.gif",
+    "locale": "enUS",
+    "mechanics": [
+      {
+        "name": "Divine Shield"
+      }
+    ]
+  },
+  {
+    "cardId": "CS2_124",
+    "dbfId": "289",
+    "name": "Wolfrider",
+    "cardSet": "Basic",
+    "type": "Minion",
+    "faction": "Horde",
+    "rarity": "Free",
+    "cost": 3,
+    "attack": 3,
+    "health": 1,
+    "text": "<b>Charge</b>",
+    "flavor": "Orcish raiders ride wolves because they are well adapted to harsh environments, and because they are soft and cuddly.",
+    "artist": "Dany Orizio",
+    "collectible": true,
+    "playerClass": "Neutral",
+    "howToGetGold": "Unlocked at Warrior Level 59.",
+    "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_124.png",
+    "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_124_premium.gif",
+    "locale": "enUS",
+    "mechanics": [
+      {
+        "name": "Charge"
+      }
+    ]
+  },
+  {
+    "cardId": "CS2_092",
+    "dbfId": "943",
+    "name": "Blessing of Kings",
+    "cardSet": "Basic",
+    "type": "Spell",
+    "faction": "Neutral",
+    "rarity": "Free",
+    "cost": 4,
+    "text": "Give a minion +4/+4. <i>(+4 Attack/+4 Health)</i>",
+    "flavor": "Given the number of kings who have been assassinated, are you sure you want their blessing?",
+    "artist": "Lucas Graciano",
+    "collectible": true,
+    "playerClass": "Paladin",
+    "howToGet": "Unlocked at Level 10.",
+    "howToGetGold": "Unlocked at Level 49.",
+    "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_092.png",
+    "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_092_premium.gif",
+    "locale": "enUS"
+  },
+  {
+    "cardId": "EX1_093",
+    "dbfId": "763",
+    "name": "Defender of Argus",
+    "cardSet": "Classic",
+    "type": "Minion",
+    "faction": "Alliance",
+    "rarity": "Rare",
+    "cost": 4,
+    "attack": 2,
+    "health": 3,
+    "text": "<b>Battlecry:</b> Give your two random minions +1/+1 and <b>Taunt</b>.",
+    "flavor": "You wouldn’t think that Argus would need this much defending.  But it does.",
+    "artist": "Alex Horley Orlandelli",
+    "collectible": true,
+    "playerClass": "Neutral",
+    "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_093.png",
+    "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/EX1_093_premium.gif",
+    "locale": "enUS",
+    "mechanics": [
+      {
+        "name": "Taunt"
+      },
+      {
+        "name": "Battlecry"
+      }
+    ]
+  }
+]
