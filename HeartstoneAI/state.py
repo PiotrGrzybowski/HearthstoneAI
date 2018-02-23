@@ -2,6 +2,7 @@ from HeartstoneAI.cards import Minion
 
 MAX_HAND_SIZE = 10
 
+
 class Player:
     def __init__(self, hero, hand, deck, board, graveyard):
         self.hero = hero
@@ -44,17 +45,21 @@ class State:
     def __init__(self, current_player, opposite_player):
         self.current_player = current_player
         self.opposite_player = opposite_player
+        self.comensation_abilities = dict()
 
     def play_card(self, index):
         card = self.current_player.hand.pop(index)
-        for ability in card.abilities:
+        for name, ability in card.abilities.items():
             ability(self)
         self.current_player.put_down_card(card)
 
     @staticmethod
     def battle(attacking_card, attacked_card):
+        if 'divine_shield' not in attacked_card.abilities:
+            attacked_card.health -= attacking_card.attack
+        else:
+            attacked_card.abilities.pop('divine_shield')
         attacking_card.health -= attacked_card.attack
-        attacked_card.health -= attacking_card.attack
         attacking_card.summoning_sickness = True
 
     def attack(self, attacking_index, attacked_index):
@@ -83,3 +88,7 @@ class State:
 
     def disable_sickness(self):
         self.current_player.disable_sickness()
+
+    def compensate_abilities(self):
+        for name, ability in self.comensation_abilities:
+            ability(self)

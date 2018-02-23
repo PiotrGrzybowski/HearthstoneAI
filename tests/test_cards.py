@@ -2,30 +2,33 @@ import unittest
 from functools import partial
 
 from HeartstoneAI.cards import CombatCard, Spell, Hero
-from HeartstoneAI.flow import deals_manage_to_opposite_player
+import HeartstoneAI.abilities as abilities
 from HeartstoneAI.state import Player, State
 
 
 class TestCards(unittest.TestCase):
     def setUp(self):
-        self.ability_1 = partial(deals_manage_to_opposite_player, damage=2)
+        self.ability_1 = {'deal_damage_to_opponent': partial(abilities.deal_damage_to_opposite_player, damage=2)}
+        self.ability_2 = {'divine_shield': abilities.do_nothing}
 
-        self.card_1 = CombatCard(name='C1', cost=1, abilities=[], attack=1, health=1)
-        self.card_2 = CombatCard(name='C2', cost=1, abilities=[], attack=1, health=1)
+        self.card_1 = CombatCard(name='C1', cost=1, abilities=dict(), attack=1, health=1)
+        self.card_2 = CombatCard(name='C2', cost=1, abilities=dict(), attack=1, health=1)
 
-        self.card_3 = CombatCard(name='C3', cost=1, abilities=[], attack=2, health=2)
-        self.card_4 = CombatCard(name='C4', cost=1, abilities=[], attack=2, health=2)
+        self.card_3 = CombatCard(name='C3', cost=1, abilities=dict(), attack=2, health=2)
+        self.card_4 = CombatCard(name='C4', cost=1, abilities=dict(), attack=2, health=2)
 
-        self.card_5 = CombatCard(name='C5', cost=1, abilities=[], attack=3, health=3)
-        self.card_6 = CombatCard(name='C6', cost=1, abilities=[], attack=3, health=3)
+        self.card_5 = CombatCard(name='C5', cost=1, abilities=dict(), attack=3, health=3)
+        self.card_6 = CombatCard(name='C6', cost=1, abilities=dict(), attack=3, health=3)
 
-        self.card_7 = CombatCard(name='C5', cost=1, abilities=[], attack=4, health=4)
-        self.card_8 = CombatCard(name='C6', cost=1, abilities=[], attack=4, health=4)
+        self.card_7 = CombatCard(name='C5', cost=1, abilities=dict(), attack=4, health=4)
+        self.card_8 = CombatCard(name='C6', cost=1, abilities=dict(), attack=4, health=4)
 
-        self.spell_1 = Spell(name='PaSpell', cost=1, abilities=[self.ability_1])
+        self.card_8.abilities['charge'] = partial(abilities.charge, card=self.card_8)
 
-        self.hero_1 = Hero(name='Pamisio', cost=0, abilities=[], attack=0, health=20, hero_class=None)
-        self.hero_2 = Hero(name='Pamewcia', cost=0, abilities=[], attack=0, health=20, hero_class=None)
+        self.spell_1 = Spell(name='PaSpell', cost=1, abilities={**self.ability_1, **self.ability_2})
+
+        self.hero_1 = Hero(name='Pamisio', cost=0, abilities=dict(), attack=0, health=20, hero_class=None)
+        self.hero_2 = Hero(name='Pamewcia', cost=0, abilities=dict(), attack=0, health=20, hero_class=None)
 
         self.first_player = Player(self.hero_1, [], [], [], [])
         self.second_player = Player(self.hero_2, [], [], [], [])

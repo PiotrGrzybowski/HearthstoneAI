@@ -120,7 +120,7 @@
     "type": "Spell",
     "rarity": "Common",
     "cost": 3,
-    "text": "Give a minion\\n+3 Attack and <b>Divine Shield</b>.",
+    "text": "Give a minion +3 Attack and <b>Divine Shield</b>.",
     "flavor": "\"Arf! Arf! Arf!\" - Seal of Champions",
     "artist": "Jonboy Meyers",
     "collectible": true,
