@@ -1,24 +1,12 @@
 [
-
   {
-    "cardId": "CS2_188",
-    "dbfId": "242",
     "name": "Abusive Sergeant",
-    "cardSet": "Classic",
     "type": "Minion",
-    "faction": "Alliance",
-    "rarity": "Common",
     "cost": 1,
     "attack": 1,
     "health": 1,
-    "text": "<b>Battlecry:</b> Give a minion +2_Attack this turn.",
-    "flavor": "ADD ME TO YOUR DECK, MAGGOT!",
-    "artist": "Luca Zontini",
-    "collectible": true,
-    "playerClass": "Neutral",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_188.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_188_premium.gif",
-    "locale": "enUS",
     "mechanics": [
       {
         "name": "Battlecry"
