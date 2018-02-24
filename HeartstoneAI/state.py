@@ -1,6 +1,9 @@
+from HeartstoneAI.abilities import check_divine_shield
 from HeartstoneAI.cards import Minion
+from HeartstoneAI.abilities import DEATHRATTLE
 
 MAX_HAND_SIZE = 10
+
 
 class Player:
     def __init__(self, hero, hand, deck, board, graveyard):
@@ -17,8 +20,11 @@ class Player:
         else:
             self.graveyard.append(card)
 
-    def validate_card(self, index):
-        if self.board[index].health <= 0:
+    def validate_card(self, index, state):
+        card = self.board[index]
+        if card.health <= 0:
+            if DEATHRATTLE in card.abilities:
+                card.abilities[DEATHRATTLE](state)
             self.graveyard.append(self.board.pop(index))
 
     def draw_card(self):
@@ -44,27 +50,30 @@ class State:
     def __init__(self, current_player, opposite_player):
         self.current_player = current_player
         self.opposite_player = opposite_player
+        self.compensation_abilities = dict()
 
     def play_card(self, index):
         card = self.current_player.hand.pop(index)
-        for ability in card.abilities:
-            ability(self)
+        for name, ability in card.abilities.items():
+            if name != DEATHRATTLE:
+                ability(self)
         self.current_player.put_down_card(card)
 
     @staticmethod
     def battle(attacking_card, attacked_card):
+        check_divine_shield(attacked_card, attacking_card)
+
         attacking_card.health -= attacked_card.attack
-        attacked_card.health -= attacking_card.attack
         attacking_card.summoning_sickness = True
 
     def attack(self, attacking_index, attacked_index):
         self.battle(self.current_player.board[attacking_index], self.opposite_player.board[attacked_index])
-        self.current_player.validate_card(attacking_index)
-        self.opposite_player.validate_card(attacked_index)
+        self.current_player.validate_card(attacking_index, self)
+        self.opposite_player.validate_card(attacked_index, self)
 
     def attack_hero(self, attacking_index):
         self.battle(self.current_player.board[attacking_index], self.opposite_player.hero)
-        self.current_player.validate_card(attacking_index)
+        self.current_player.validate_card(attacking_index, self)
 
     def switch_players(self):
         temp_player = self.current_player
@@ -83,3 +92,7 @@ class State:
 
     def disable_sickness(self):
         self.current_player.disable_sickness()
+
+    def compensate_abilities(self):
+        for name, ability in self.compensation_abilities:
+            ability(self)
