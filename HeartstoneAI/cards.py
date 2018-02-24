@@ -1,3 +1,7 @@
+SPELL = 'Spell'
+MINION = 'Minion'
+
+
 class Card:
     def __init__(self, name, cost, abilities):
         self.name = name
@@ -28,3 +32,7 @@ class Hero(CombatCard):
 class Spell(Card):
     def __init__(self, name, cost, abilities):
         super().__init__(name, cost, abilities)
+
+
+CARD_TYPES = {MINION: Minion,
+              SPELL: Spell}

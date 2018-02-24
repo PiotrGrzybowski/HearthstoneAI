@@ -17,36 +17,53 @@ def deal_damage_to_opposite_player(state, damage):
 
 def add_shield_to_own_minion(state):
     minion = random.choice(state.current_player.board)
-    minion.abilities[DIVINE_SHIELD] = apply_divine_shield
+    minion.abilities[DIVINE_SHIELD] = divine_shield
 
 
 def add_ability_and_specs_to_own_minion(state, ability, attack=0, health=0):
     minion = random.choice(state.current_player.board)
     minion.abilities = {**minion.abilities, **ability}
-    minion.attack += attack
-    minion.health += health
+    add_specs(attack, health, minion)
+
+
+def add_divine_shield_and_specs_to_own_minion(state, attack=0, health=0):
+    minion = random.choice(state.current_player.board)
+    minion.abilities[DIVINE_SHIELD] = divine_shield
+    add_specs(attack, health, minion)
+
+
+def add_taunt_and_specs_to_own_minion(state, attack=0, health=0):
+    minion = random.choice(state.current_player.board)
+    minion.abilities[TAUNT] = taunt
+    add_specs(attack, health, minion)
 
 
 def add_specs_to_own_minion_for_turn(state, attack=0, health=0):
     minion = random.choice(state.current_player.board)
+    add_specs(attack, health, minion)
+    state.compensation_abilities['remove_attack'] = partial(add_specs_to_own_minion, attack=-attack, health=0,
+                                                            minion=minion)
+
+
+def add_specs(attack, health, minion):
     minion.attack += attack
     minion.health += health
-    state.compensation_abilities['remove_attack'] = partial(add_specs_to_own_minion,
-                                                            attack=-attack, health=0,
-                                                            minion=minion)
 
 
 def add_specs_to_own_minion(state, health=0, attack=0):
     minion = random.choice(state.current_player.board)
-    minion.health += health
-    minion.attack += attack
+    add_specs(attack, health, minion)
+
+
+def give_ability_to_minion(minion, ability):
+    minion.abilities = {**minion.abilities, **ability}
 
 
 def charge(state, minion):
     minion.summoning_sickness = False
 
 
-def apply_divine_shield(state):
+def divine_shield(state):
     pass
 
 
@@ -61,3 +78,17 @@ def check_divine_shield(attacked_card, attacking_card):
         attacked_card.abilities.pop(DIVINE_SHIELD)
     else:
         attacked_card.health -= attacking_card.attack
+
+
+def get_divine_shield_ability(**kwargs):
+    return partial(divine_shield, kwargs)
+
+
+ABILITIES = {'add_specs_to_own_minion_for_turn': add_specs_to_own_minion_for_turn,
+             'divine_shield': divine_shield,
+             'charge': charge,
+             'add_specs_to_own_minion': add_specs_to_own_minion,
+             'add_shield_to_own_minion': add_shield_to_own_minion,
+             'draw_cards_to_match_opponent': draw_cards_to_match_opponent,
+             'add_divine_shield_and_specs_to_own_minion': add_divine_shield_and_specs_to_own_minion,
+             'add_taunt_and_specs_to_own_minion': add_taunt_and_specs_to_own_minion}

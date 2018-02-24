@@ -10,7 +10,7 @@ from HeartstoneAI.state import Player, State
 class TestCards(unittest.TestCase):
     def setUp(self):
         self.ability_1 = {'deal_damage_to_opponent': partial(abilities.deal_damage_to_opposite_player, damage=2)}
-        self.ability_2 = {DIVINE_SHIELD: abilities.apply_divine_shield}
+        self.ability_2 = {DIVINE_SHIELD: abilities.divine_shield}
         self.ability_charge = {CHARGE: abilities.charge}
 
         self.card_1 = Minion(name='C1', cost=1, abilities=dict(), attack=1, health=1, minion_type=None)
@@ -79,7 +79,7 @@ class TestCards(unittest.TestCase):
         self.assertFalse(self.card_1.summoning_sickness)
 
     def test_divine_shield_reduce_damage_to_zero_and_disappear(self):
-        self.card_1.abilities[DIVINE_SHIELD] = abilities.apply_divine_shield
+        self.card_1.abilities[DIVINE_SHIELD] = abilities.divine_shield
         self.state.current_player.board = [self.card_2]
         self.state.opposite_player.board = [self.card_1]
 
