@@ -1,4 +1,4 @@
-from HeartstoneAI.abilities import check_divine_shield
+from HeartstoneAI.abilities import check_divine_shield, CHARGE
 from HeartstoneAI.cards import Minion
 from HeartstoneAI.abilities import DEATHRATTLE
 
@@ -55,7 +55,9 @@ class State:
     def play_card(self, index):
         card = self.current_player.hand.pop(index)
         for name, ability in card.abilities.items():
-            if name != DEATHRATTLE:
+            if name == CHARGE:
+                card.summoning_sickness = False
+            elif name != DEATHRATTLE:
                 ability(self)
         self.current_player.put_down_card(card)
 
@@ -94,5 +96,6 @@ class State:
         self.current_player.disable_sickness()
 
     def compensate_abilities(self):
-        for name, ability in self.compensation_abilities:
+        for _, ability in self.compensation_abilities.items():
             ability(self)
+        self.compensation_abilities = {}
