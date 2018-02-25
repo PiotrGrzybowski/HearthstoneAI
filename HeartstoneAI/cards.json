@@ -47,7 +47,7 @@
       {
         "name": "add_specs_to_own_minion",
         "function": "add_specs_to_own_minion",
-        "kwargs": {"health": 1, "attack": 2}
+        "kwargs": {"attack": 1, "health": 2}
       }
     ]
   },
@@ -98,7 +98,7 @@
       {
         "name": "add_divine_shield_and_specs_to_own_minion",
         "function": "add_divine_shield_and_specs_to_own_minion",
-        "kwargs": {"health": 3, "attack": 0}
+        "kwargs": {"attack": 3, "health": 0}
       }
     ]
   },
@@ -122,26 +122,16 @@
     ]
   },
   {
-    "cardId": "CS2_124",
-    "dbfId": "289",
     "name": "Wolfrider",
-    "cardSet": "Basic",
     "type": "Minion",
-    "faction": "Horde",
-    "rarity": "Free",
     "cost": 3,
     "attack": 3,
     "health": 1,
     "minion_type": null,
     "text": "<b>Charge</b>",
-    "flavor": "Orcish raiders ride wolves because they are well adapted to harsh environments, and because they are soft and cuddly.",
-    "artist": "Dany Orizio",
-    "collectible": true,
     "playerClass": "Neutral",
-    "howToGetGold": "Unlocked at Warrior Level 59.",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_124.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_124_premium.gif",
-    "locale": "enUS",
     "abilities": [
       {
         "name": "charge",
@@ -154,15 +144,15 @@
     "name": "Blessing of Kings",
     "type": "Spell",
     "cost": 4,
-    "text": "Give a minion +4/+4. <i>(+4 Attack/+4 Health)</i>",
+    "text": "Give a minion +4/+4.",
     "playerClass": "Paladin",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_092.png",
     "imgGold": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/animated/CS2_092_premium.gif",
     "abilities": [
       {
-        "name": "add_specs_to_own_minion_for_turn",
-        "function": "add_specs_to_own_minion_for_turn",
-        "kwargs": {"health": 4, "attack": 4}
+        "name": "add_specs_to_own_minion",
+        "function": "add_specs_to_own_minion",
+        "kwargs": {"attack": 4, "health": 4}
       }
     ]
   },
@@ -181,7 +171,7 @@
       {
         "name": "add_taunt_shield_and_specs_to_own_minion",
         "function": "add_divine_shield_and_specs_to_own_minion",
-        "kwargs": {"health": 1, "attack": 1}
+        "kwargs": {"attack": 1, "health": 1}
       }
     ]
   }
