@@ -8,7 +8,7 @@ from HeartstoneAI.state import Player, State
 
 class TestDeck(unittest.TestCase):
     def setUp(self):
-        with open('/home/piotr/Workspace/DataScience/HearthstoneAI/HeartstoneAI/cards.json') as json_file:
+        with open('..\\HeartstoneAI\\cards.json') as json_file:
             data = json.load(json_file)
             self.abusive_sergeant = card_from_json(data[0])
             self.agent_squire = card_from_json(data[1])
@@ -92,7 +92,6 @@ class TestDeck(unittest.TestCase):
         self.assertEqual(self.abusive_sergeant.attack, 2)
         self.assertEqual(self.abusive_sergeant.health, 3)
 
-    @unittest.skip("TODO")
     def test_selfless_hero(self):
         """
         Deathrattle: Give a random friendly minion Divine Shield.

@@ -16,33 +16,38 @@ def deal_damage_to_opposite_player(state, damage):
 
 
 def add_shield_to_own_minion(state):
-    minion = random.choice(state.current_player.board)
-    minion.abilities[DIVINE_SHIELD] = divine_shield
+    if state.current_player.board:
+        minion = random.choice(state.current_player.board)
+        minion.abilities[DIVINE_SHIELD] = divine_shield
 
 
 def add_ability_and_specs_to_own_minion(state, ability, attack=0, health=0):
-    minion = random.choice(state.current_player.board)
-    minion.abilities = {**minion.abilities, **ability}
-    add_specs(attack, health, minion)
+    if state.current_player.board:
+        minion = random.choice(state.current_player.board)
+        minion.abilities = {**minion.abilities, **ability}
+        add_specs(attack, health, minion)
 
 
 def add_divine_shield_and_specs_to_own_minion(state, attack=0, health=0):
-    minion = random.choice(state.current_player.board)
-    minion.abilities[DIVINE_SHIELD] = divine_shield
-    add_specs(attack, health, minion)
+    if state.current_player.board:
+        minion = random.choice(state.current_player.board)
+        minion.abilities[DIVINE_SHIELD] = divine_shield
+        add_specs(attack, health, minion)
 
 
 def add_taunt_and_specs_to_own_minion(state, attack=0, health=0):
-    minion = random.choice(state.current_player.board)
-    minion.abilities[TAUNT] = taunt
-    add_specs(attack, health, minion)
+    if state.current_player.board:
+        minion = random.choice(state.current_player.board)
+        minion.abilities[TAUNT] = taunt
+        add_specs(attack, health, minion)
 
 
 def add_specs_to_own_minion_for_turn(state, attack=0, health=0):
-    minion = random.choice(state.current_player.board)
-    add_specs(attack, health, minion)
-    state.compensation_abilities['remove_attack'] = partial(add_specs_to_concrete_minion, attack=-attack, health=0,
-                                                            minion=minion)
+    if state.current_player.board:
+        minion = random.choice(state.current_player.board)
+        add_specs(attack, health, minion)
+        state.compensation_abilities['remove_attack'] = partial(add_specs_to_specified_minion, attack=-attack, health=0,
+                                                                minion=minion)
 
 
 def add_specs(attack, health, minion):
@@ -51,11 +56,12 @@ def add_specs(attack, health, minion):
 
 
 def add_specs_to_own_minion(state, health=0, attack=0):
-    minion = random.choice(state.current_player.board)
-    add_specs(attack, health, minion)
+    if state.current_player.board:
+        minion = random.choice(state.current_player.board)
+        add_specs(attack, health, minion)
 
 
-def add_specs_to_concrete_minion(state, minion=None, health=0, attack=0):
+def add_specs_to_specified_minion(state, minion=None, health=0, attack=0):
     add_specs(attack, health, minion)
 
 
