@@ -27,6 +27,13 @@ class Player:
                 card.abilities[DEATHRATTLE](state)
             self.graveyard.append(self.board.pop(index))
 
+    def validate_card_by_ref(self, card, state):
+        if card.health <= 0:
+            if DEATHRATTLE in card.abilities:
+                card.abilities[DEATHRATTLE](state)
+            self.graveyard.append(card)
+            self.board.remove(card)
+
     def draw_card(self):
         if len(self.hand) < MAX_HAND_SIZE:
             self.hand.append(self.deck.pop())
@@ -80,7 +87,6 @@ class State:
     @staticmethod
     def battle(attacking_card, attacked_card):
         check_divine_shield(attacked_card, attacking_card)
-
         attacking_card.health -= attacked_card.attack
         attacking_card.summoning_sickness = True
 
@@ -89,9 +95,18 @@ class State:
         self.current_player.validate_card(attacking_index, self)
         self.opposite_player.validate_card(attacked_index, self)
 
+    def attack_by_ref(self, attacking_card, attacked_card):
+        self.battle(attacking_card, attacked_card)
+        self.current_player.validate_card_by_ref(attacking_card, self)
+        self.opposite_player.validate_card_by_ref(attacked_card, self)
+
     def attack_hero(self, attacking_index):
         self.battle(self.current_player.board[attacking_index], self.opposite_player.hero)
         self.current_player.validate_card(attacking_index, self)
+
+    def attack_hero_by_ref(self, attacking_card):
+        self.battle(attacking_card, self.opposite_player.hero)
+        self.current_player.validate_card_by_ref(attacking_card, self)
 
     def switch_players(self):
         temp_player = self.current_player

@@ -2,15 +2,19 @@ import numpy as np
 import unittest
 import json
 
+from copy import deepcopy
+
+from HearthstoneAI.action_tree import walk, get_leafs
 from HearthstoneAI.actions_generation import get_cards_play_combinations, get_cards_to_play
 from HearthstoneAI.cards import Hero
 from HearthstoneAI.cards_generator import card_from_json
 from HearthstoneAI.state import Player, State
+from settings import CARDS_FILE
 
 
 class TestActions(unittest.TestCase):
     def setUp(self):
-        with open('../HearthstoneAI/cards.json') as json_file:
+        with open(CARDS_FILE) as json_file:
             data = json.load(json_file)
             self.abusive_sergeant = card_from_json(data[0])
             self.agent_squire = card_from_json(data[1])
@@ -61,3 +65,11 @@ class TestActions(unittest.TestCase):
 
         self.assertEqual(self.state.current_player.hand, [self.agent_squire, self.selfless_hero])
         self.assertEqual(self.state.current_player.board, [self.abusive_sergeant])
+
+    def test_ewcia(self):
+        self.state.current_player.hand = [self.abusive_sergeant, self.agent_squire, self.selfless_hero]
+        self.state.current_player.board = [deepcopy(self.abusive_sergeant), deepcopy(self.selfless_hero)]
+        for card in self.state.current_player.board:
+            card.summoning_sickness = False
+        self.state.opposite_player.board = [deepcopy(self.selfless_hero), deepcopy(self.abusive_sergeant)]
+        get_leafs(self.state, 3)
