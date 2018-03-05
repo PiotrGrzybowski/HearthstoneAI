@@ -7,7 +7,7 @@ class Card:
         self.cost = cost
 
 
-def get_dubdrtd(cards, target, partial=None, partial_sum=0):
+def get_cards_to_play(cards, target, partial=None, partial_sum=0):
     if partial is None:
         partial = []
     if partial_sum <= target:
@@ -16,7 +16,7 @@ def get_dubdrtd(cards, target, partial=None, partial_sum=0):
         return
     for i, card in enumerate(cards):
         remaining = cards[i + 1:]
-        yield from get_dubdrtd(remaining, target, partial + [card.name], partial_sum + card.cost)
+        yield from get_cards_to_play(remaining, target, partial + [card], partial_sum + card.cost)
 
 
 def get_cards_play_combinations(cards, indexes, target, partial=None, partial_sum=0):

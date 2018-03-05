@@ -2,7 +2,7 @@ import numpy as np
 import unittest
 import json
 
-from HeartstoneAI.actions_generation import get_cards_play_combinations
+from HeartstoneAI.actions_generation import get_cards_play_combinations, get_cards_to_play
 from HeartstoneAI.cards import Hero
 from HeartstoneAI.cards_generator import card_from_json
 from HeartstoneAI.state import Player, State
@@ -43,5 +43,16 @@ class TestActions(unittest.TestCase):
         self.assertEqual(len(list(get_cards_play_combinations(player_hand, indexes, 2))), 7)
         self.assertEqual(len(list(get_cards_play_combinations(player_hand, indexes, 3))), 9)
 
+    def test_get_cards_to_play(self):
+        self.state.current_player.hand = [self.abusive_sergeant, self.agent_squire, self.selfless_hero]
+
+        combination = list(get_cards_to_play(self.state.current_player.hand, 2))
+        print(combination)
+
+
     def test_cards_to_play_with_combination(self):
-        combination = [0, 1]
+        self.state.current_player.hand = [self.abusive_sergeant, self.agent_squire, self.selfless_hero]
+        self.state.play_cards([self.state.current_player.hand[i] for i in [0, 2]])
+
+        # print(self.state.current_player.board)
+        self.assertAlmostEqual(self.state.current_player.board, [self.abusive_sergeant, self.selfless_hero])

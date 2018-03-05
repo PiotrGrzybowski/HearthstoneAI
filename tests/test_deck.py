@@ -8,7 +8,7 @@ from HeartstoneAI.state import Player, State
 
 class TestDeck(unittest.TestCase):
     def setUp(self):
-        with open('..\\HeartstoneAI\\cards.json') as json_file:
+        with open('../HeartstoneAI/cards.json') as json_file:
             data = json.load(json_file)
             self.abusive_sergeant = card_from_json(data[0])
             self.agent_squire = card_from_json(data[1])

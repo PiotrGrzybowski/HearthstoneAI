@@ -54,12 +54,28 @@ class State:
 
     def play_card(self, index):
         card = self.current_player.hand.pop(index)
+        self.apply_abilities(card)
+        self.current_player.put_down_card(card)
+
+    def play_card_by_ref(self, card):
+        self.apply_abilities(card)
+        self.current_player.put_down_card(card)
+        self.current_player.hand.remove(card)
+
+    def apply_abilities(self, card):
         for name, ability in card.abilities.items():
             if name == CHARGE:
                 card.summoning_sickness = False
             elif name != DEATHRATTLE:
                 ability(self)
-        self.current_player.put_down_card(card)
+
+    def play_cards(self, cards):
+        for card in cards:
+            self.apply_abilities(card)
+            self.current_player.put_down_card(card)
+            self.current_player.hand.remove(card)
+
+
 
     @staticmethod
     def battle(attacking_card, attacked_card):
