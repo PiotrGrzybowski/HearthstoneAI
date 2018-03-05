@@ -1,10 +1,10 @@
 import unittest
 from functools import partial
 
-from HeartstoneAI.cards import CombatCard, Spell, Hero, Minion
-from HeartstoneAI.abilities import CHARGE, DIVINE_SHIELD
-import HeartstoneAI.abilities as abilities
-from HeartstoneAI.state import Player, State
+from HearthstoneAI.cards import CombatCard, Spell, Hero, Minion
+from HearthstoneAI.abilities import CHARGE, DIVINE_SHIELD
+import HearthstoneAI.abilities as abilities
+from HearthstoneAI.state import Player, State
 
 
 class TestCards(unittest.TestCase):

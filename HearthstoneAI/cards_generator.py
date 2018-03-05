@@ -1,6 +1,6 @@
 from functools import partial
-from HeartstoneAI.abilities import ABILITIES
-from HeartstoneAI.cards import Minion, CARD_TYPES
+from HearthstoneAI.abilities import ABILITIES
+from HearthstoneAI.cards import Minion, CARD_TYPES
 
 PARAMETERS = {'Minion': ['name', 'cost', 'attack', 'health', 'minion_type'],
               'Spell': ['name', 'cost']}

@@ -1,6 +1,6 @@
-from HeartstoneAI.cards import Minion, Spell
-import HeartstoneAI.abilities as abilities
-from HeartstoneAI.abilities import CHARGE, DIVINE_SHIELD, DEATHRATTLE, TAUNT
+from HearthstoneAI.cards import Minion, Spell
+import HearthstoneAI.abilities as abilities
+from HearthstoneAI.abilities import CHARGE, DIVINE_SHIELD, DEATHRATTLE, TAUNT
 from functools import partial
 
 ABUSIVE_SERGEANT = "abusive_sergeant"

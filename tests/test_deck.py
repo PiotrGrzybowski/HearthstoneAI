@@ -1,14 +1,14 @@
 import unittest
 import json
 
-from HeartstoneAI.cards import Hero
-from HeartstoneAI.cards_generator import card_from_json
-from HeartstoneAI.state import Player, State
+from HearthstoneAI.cards import Hero
+from HearthstoneAI.cards_generator import card_from_json
+from HearthstoneAI.state import Player, State
 
 
 class TestDeck(unittest.TestCase):
     def setUp(self):
-        with open('../HeartstoneAI/cards.json') as json_file:
+        with open('../HearthstoneAI/cards.json') as json_file:
             data = json.load(json_file)
             self.abusive_sergeant = card_from_json(data[0])
             self.agent_squire = card_from_json(data[1])

@@ -1,6 +1,6 @@
-from HeartstoneAI.abilities import check_divine_shield, CHARGE
-from HeartstoneAI.cards import Minion
-from HeartstoneAI.abilities import DEATHRATTLE
+from HearthstoneAI.abilities import check_divine_shield, CHARGE
+from HearthstoneAI.cards import Minion
+from HearthstoneAI.abilities import DEATHRATTLE
 
 MAX_HAND_SIZE = 10
 
