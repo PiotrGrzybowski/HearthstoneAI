@@ -4,7 +4,8 @@ import json
 
 from copy import deepcopy
 
-from HearthstoneAI.action_tree import walk, get_leafs
+from HearthstoneAI import evaluation_utils
+from HearthstoneAI.action_tree import walk, get_leafs, get_new_state
 from HearthstoneAI.actions_generation import get_cards_play_combinations, get_cards_to_play
 from HearthstoneAI.cards import Hero
 from HearthstoneAI.cards_generator import card_from_json
@@ -72,4 +73,8 @@ class TestActions(unittest.TestCase):
         for card in self.state.current_player.board:
             card.summoning_sickness = False
         self.state.opposite_player.board = [deepcopy(self.selfless_hero), deepcopy(self.abusive_sergeant)]
-        get_leafs(self.state, 3)
+        self.state = get_new_state(self.state, 3, evaluation_utils.offensive_strategy)
+        print(str(self.state.opposite_player.hero.health))
+        self.state.switch_players()
+        print(str(self.state.current_player.hero.health))
+        print(str(self.state.opposite_player.hero.health))

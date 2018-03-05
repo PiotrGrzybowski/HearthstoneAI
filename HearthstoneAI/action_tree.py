@@ -6,7 +6,19 @@ from HearthstoneAI.cards import Minion
 def get_leafs(state, available_mana):
     leafs = []
     walk(state, 0, available_mana, leafs)
-    print(str(len(leafs)))
+    return leafs
+
+
+def get_new_state(state, available_mana, evaluation_function):
+    leafs = get_leafs(state, available_mana)
+    best_state = state
+    max = evaluation_function(best_state)
+    for elem in leafs:
+        evaluation = evaluation_function(elem)
+        if evaluation > max:
+            best_state = elem
+            max = evaluation
+    return best_state
 
 
 def walk(state, current_mana, available_mana, leafs, lol=''):
