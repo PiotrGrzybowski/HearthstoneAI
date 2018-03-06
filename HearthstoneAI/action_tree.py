@@ -21,7 +21,7 @@ def get_new_state(state, available_mana, evaluation_function):
             best_state = elem[0]
             path = elem[1]
             max = evaluation
-    print(path)
+    print("Path = {}".format(path))
     return best_state
 
 
@@ -32,10 +32,10 @@ def walk(state, current_mana, available_mana, leafs, lol='', path=''):
         new_state = deepcopy(state)
         if card.cost + current_mana <= available_mana:
             path += 'Play ' + card.name + ' -> '
-            print(lol + 'Play ' + card.name)
+            # print(lol + 'Play ' + card.name)
             new_state.play_card(index)
             walk(new_state, current_mana + card.cost, available_mana, leafs, lol + '\t', path)
-    return walk_attacks(state, leafs, lol)
+    return walk_attacks(state, leafs, lol, path)
 
 
 def walk_attacks(state, leafs, lol='', path=''):
@@ -45,17 +45,17 @@ def walk_attacks(state, leafs, lol='', path=''):
         if isinstance(card, Minion) and not card.summoning_sickness:
             if current_card in new_state.current_player.board and not current_card.summoning_sickness:
                 path += 'Attacking HERO with ' + card.name + ' -> '
-                print(lol + 'Attacking HERO with ' + card.name)
+                # print(lol + 'Attacking HERO with ' + card.name)
                 new_state.attack_hero_by_ref(current_card)
                 walk_attacks(new_state, leafs, lol + '\t', path)
             for opponent_card in new_state.opposite_player.board:
                 if isinstance(opponent_card, Minion) and not current_card.summoning_sickness:
                     path += 'battling ' + card.name + ' and ' + opponent_card.name + ' -> '
-                    print(lol + 'battling ' + card.name + ' and ' + opponent_card.name)
+                    # print(lol + 'battling ' + card.name + ' and ' + opponent_card.name)
                     new_state.attack_by_ref(new_state.current_player.board[index], opponent_card)
                     walk_attacks(new_state, leafs, lol + '\t', path)
             # newer_state = deepcopy(state)
     path += 'END'
-    print(lol + 'END')
+    # print(lol + 'END')
     leafs.append((state, path))
     return state, path
