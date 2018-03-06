@@ -73,7 +73,7 @@ class TestActions(unittest.TestCase):
         for card in self.state.current_player.board:
             card.summoning_sickness = False
         self.state.opposite_player.board = [deepcopy(self.selfless_hero), deepcopy(self.abusive_sergeant)]
-        self.state = get_new_state(self.state, 3, evaluation_utils.offensive_strategy)
+        self.state = get_new_state(self.state, 3, evaluation_utils.random_strategy)
         print(str(self.state.opposite_player.hero.health))
         self.state.switch_players()
         print(str(self.state.current_player.hero.health))
