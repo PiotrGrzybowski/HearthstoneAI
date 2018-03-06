@@ -34,7 +34,8 @@ def walk(state, current_mana, available_mana, leafs, lol='', path=''):
             path += 'Play ' + card.name + ' -> '
             # print(lol + 'Play ' + card.name)
             new_state.play_card(index)
-            walk(new_state, current_mana + card.cost, available_mana, leafs, lol + '\t', path)
+            current_mana += card.cost
+            walk(new_state, current_mana, available_mana, leafs, lol + '\t', path)
     return walk_attacks(state, leafs, lol, path)
 
 

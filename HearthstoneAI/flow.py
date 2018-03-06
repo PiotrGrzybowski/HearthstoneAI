@@ -62,21 +62,23 @@ def game():
 
     state.switch_players()
 
-    for mana in range(1, 10):
+    for mana in range(1, 2):
         state.draw_card()
         print("Player {}".format(1))
+        print("Hand: {}".format([(minion.name, minion.cost) for minion in state.current_player.hand]))
         for card in state.current_player.board:
             card.summoning_sickness = False
         state = get_new_state(state, mana, evaluation_utils.offensive_strategy)
-        print("Player 1 health = {}, Player 2 health = {}".format(state.current_player.hero.health, state.opposite_player.hero.health))
+        print("Player 1 health = {} \nPlayer 2 health = {}".format(state.current_player.hero.health, state.opposite_player.hero.health))
         state.switch_players()
 
         state.draw_card()
         print("\nPlayer {}".format(2))
+        print("Hand: {}".format([(minion.name, minion.cost) for minion in state.current_player.hand]))
         for card in state.current_player.board:
             card.summoning_sickness = False
         state = get_new_state(state, mana, evaluation_utils.random_strategy)
-        print("Player 1 health = {}, Player 2 health = {}".format(state.current_player.hero.health, state.opposite_player.hero.health))
+        print("Player 1 health = {} \nPlayer 2 health = {}".format(state.current_player.hero.health, state.opposite_player.hero.health))
         state.switch_players()
 
         print("\n----------------\n")
