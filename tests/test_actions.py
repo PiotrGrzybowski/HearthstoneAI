@@ -1,14 +1,17 @@
 import numpy as np
 import unittest
 import json
+from deepdiff import DeepDiff
 
 from copy import deepcopy
 
+from HearthstoneAI import action_tree
 from HearthstoneAI import evaluation_utils
 from HearthstoneAI.action_tree import walk, get_leafs, get_new_state
 from HearthstoneAI.actions_generation import get_cards_play_combinations, get_cards_to_play
 from HearthstoneAI.cards import Hero
 from HearthstoneAI.cards_generator import card_from_json
+from HearthstoneAI.mcts import perform_mcts
 from HearthstoneAI.state import Player, State
 from settings import CARDS_FILE
 
@@ -78,3 +81,20 @@ class TestActions(unittest.TestCase):
         self.state.switch_players()
         print(str(self.state.current_player.hero.health))
         print(str(self.state.opposite_player.hero.health))
+
+    def test_random_moves(self):
+        self.state.current_player.hand = [self.abusive_sergeant, self.agent_squire,
+                                          self.selfless_hero, self.divine_strength]
+        self.state.current_player.board = [deepcopy(self.abusive_sergeant), deepcopy(self.selfless_hero),
+                                           deepcopy(self.steward_of_darshire)]
+        for card in self.state.current_player.board:
+            card.summoning_sickness = False
+        self.state.opposite_player.board = [deepcopy(self.selfless_hero), deepcopy(self.abusive_sergeant)]
+
+        new_state, path = action_tree.walk_random(self.state, 0, 3)
+        print(path)
+        new_state_2 = deepcopy(new_state)
+        print(hash(new_state_2) == hash(new_state))
+        print(hash(new_state) == hash(self.state))
+
+        perform_mcts({'wins': 0, 'losses': 0, 'state': new_state, 'children': []}, 3)

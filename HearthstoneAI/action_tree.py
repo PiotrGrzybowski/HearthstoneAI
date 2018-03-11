@@ -1,4 +1,5 @@
 from copy import deepcopy
+import random
 
 from HearthstoneAI.cards import Minion
 
@@ -25,6 +26,12 @@ def get_new_state(state, available_mana, evaluation_function):
     return best_state
 
 
+def get_random_state(state, available_mana):
+    state, path = walk_random(state, 0, available_mana)
+    print("Path = {}".format(path))
+    return state
+
+
 def walk(state, current_mana, available_mana, leafs, lol='', path=''):
     if not state.current_player.hand:
         return walk_attacks(state, leafs, lol, path)
@@ -37,6 +44,53 @@ def walk(state, current_mana, available_mana, leafs, lol='', path=''):
             current_mana += card.cost
             walk(new_state, current_mana, available_mana, leafs, lol + '\t', path)
     return walk_attacks(state, leafs, lol, path)
+
+
+def walk_random(state, current_mana, available_mana, log='', path=''):
+    if not state.current_player.hand:
+        return walk_attacks_random(state, log, path)
+    available_cards = dict()
+    for index, card in enumerate(state.current_player.hand):
+        if card.cost + current_mana <= available_mana:
+            available_cards[index] = card
+    if random.uniform(0, 1) < len(available_cards)/(len(available_cards) + 1):
+        new_state = deepcopy(state)
+        index, card = random.choice(list(available_cards.items()))
+        path += 'Play ' + card.name + ' -> '
+        new_state.play_card(index)
+        current_mana += card.cost
+        state, path = walk_random(new_state, current_mana, available_mana, log + '\t', path)
+    return walk_attacks_random(state, log, path)
+
+
+def walk_attacks_random(state, log='', path=''):
+    available_cards = dict()
+    for index, card in enumerate(state.current_player.board):
+        if isinstance(card, Minion) and not card.summoning_sickness:
+            available_cards[index] = card
+    cards_to_attack = dict()
+    for index, card in enumerate(state.opposite_player.board):
+        if isinstance(card, Minion) and not card.summoning_sickness:
+            cards_to_attack[index] = card
+    # combinations of our board cards and opponent cards
+    # + options of attacking hero with our cards + not doing anything
+    available_actions = (len(available_cards)*(len(cards_to_attack) + 1)) + 1
+    attack_options = available_actions - 1
+    if available_actions - 1 > 0 and random.uniform(0, 1) < attack_options / available_actions:
+        new_state = deepcopy(state)
+        if random.uniform(0, 1) < len(available_cards) / (available_actions - 1):
+            index, card = random.choice(list(available_cards.items()))
+            path += 'Attacking HERO with ' + card.name + ' -> '
+            new_state.attack_hero(index)
+            state, path = walk_attacks_random(new_state, log + '\t', path)
+        else:
+            index, card = random.choice(list(available_cards.items()))
+            opponent_index, opponent_card = random.choice(list(cards_to_attack.items()))
+            path += 'battling ' + card.name + ' and ' + opponent_card.name + ' -> '
+            new_state.attack_by_ref(new_state.current_player.board[index],
+                                    new_state.opposite_player.board[opponent_index])
+            state, path = walk_attacks_random(new_state, log + '\t', path)
+    return state, path
 
 
 def walk_attacks(state, leafs, lol='', path=''):

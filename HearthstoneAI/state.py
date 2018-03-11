@@ -1,3 +1,5 @@
+from deepdiff import DeepDiff
+
 from HearthstoneAI.abilities import check_divine_shield, CHARGE
 from HearthstoneAI.cards import Minion
 from HearthstoneAI.abilities import DEATHRATTLE
@@ -51,6 +53,10 @@ class Player:
     @property
     def is_dead(self):
         return self.hero.health <= 0
+
+    def __hash__(self):
+        return hash((tuple(self.board), tuple(self.deck), self.fatigue,
+                     tuple(self.graveyard), tuple(self.hand), self.hero))
 
 
 class State:
@@ -130,3 +136,13 @@ class State:
         for _, ability in self.compensation_abilities.items():
             ability(self)
         self.compensation_abilities = {}
+
+    def __hash__(self):
+        return hash((self.current_player,
+                     self.opposite_player))
+
+    def __eq__(self, other):
+        return not DeepDiff(self, other)
+
+    def __ne__(self, other):
+        return bool(DeepDiff(self, other))
