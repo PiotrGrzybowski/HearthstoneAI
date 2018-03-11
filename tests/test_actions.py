@@ -89,12 +89,12 @@ class TestActions(unittest.TestCase):
                                            deepcopy(self.steward_of_darshire)]
         for card in self.state.current_player.board:
             card.summoning_sickness = False
-        self.state.opposite_player.board = [deepcopy(self.selfless_hero), deepcopy(self.abusive_sergeant)]
+        self.state.opposite_player.hand = [deepcopy(self.abusive_sergeant), deepcopy(self.agent_squire),
+                                            deepcopy(self.selfless_hero), deepcopy(self.divine_strength)]
+        self.state.opposite_player.board = [deepcopy(self.abusive_sergeant), deepcopy(self.selfless_hero),
+                                           deepcopy(self.steward_of_darshire)]
+        # new_state, path = action_tree.walk_random(self.state, 0, 3)
+        # print(path)
 
-        new_state, path = action_tree.walk_random(self.state, 0, 3)
-        print(path)
-        new_state_2 = deepcopy(new_state)
-        print(hash(new_state_2) == hash(new_state))
-        print(hash(new_state) == hash(self.state))
-
-        perform_mcts({'wins': 0, 'losses': 0, 'state': new_state, 'children': []}, 3)
+        perform_mcts({'wins': 0, 'losses': 0, 'state': self.state,
+                      'children': [], 'path': ''}, 3)

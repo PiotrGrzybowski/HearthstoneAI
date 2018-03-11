@@ -28,7 +28,7 @@ def get_new_state(state, available_mana, evaluation_function):
 
 def get_random_state(state, available_mana):
     state, path = walk_random(state, 0, available_mana)
-    print("Path = {}".format(path))
+    # print("Path = {}".format(path))
     return state
 
 
