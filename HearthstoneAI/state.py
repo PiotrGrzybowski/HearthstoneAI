@@ -64,6 +64,7 @@ class State:
         self.current_player = current_player
         self.opposite_player = opposite_player
         self.compensation_abilities = dict()
+        self.mana = 1
 
     def play_card(self, index):
         card = self.current_player.hand.pop(index)
@@ -124,6 +125,13 @@ class State:
             self.current_player.draw_card()
         else:
             self.current_player.apply_fatigue()
+
+    def new_turn(self):
+        self.mana = min(10, self.mana + 1)
+        self.switch_players()
+        self.draw_card()
+        self.switch_players()
+        self.draw_card()
 
     @property
     def is_terminal(self):

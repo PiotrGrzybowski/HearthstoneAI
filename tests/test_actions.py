@@ -97,4 +97,4 @@ class TestActions(unittest.TestCase):
         # print(path)
 
         perform_mcts({'wins': 0, 'losses': 0, 'state': self.state,
-                      'children': [], 'path': ''}, 3)
+                      'children': [], 'path': '', 'new_turn': True})

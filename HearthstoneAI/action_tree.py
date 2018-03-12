@@ -4,9 +4,9 @@ import random
 from HearthstoneAI.cards import Minion
 
 
-def get_leafs(state, available_mana):
+def get_leafs(state):
     leafs = []
-    walk(state, 0, available_mana, leafs)
+    walk(state, 0, state.mana, leafs)
     return leafs
 
 
@@ -70,7 +70,7 @@ def walk_attacks_random(state, log='', path=''):
             available_cards[index] = card
     cards_to_attack = dict()
     for index, card in enumerate(state.opposite_player.board):
-        if isinstance(card, Minion) and not card.summoning_sickness: #Do cards to attack have to have summoning sickness set to False if we want to attack them?
+        if isinstance(card, Minion): #Do cards to attack have to have summoning sickness set to False if we want to attack them?
             cards_to_attack[index] = card
     # combinations of our board cards and opponent cards
     # + options of attacking hero with our cards + not doing anything
