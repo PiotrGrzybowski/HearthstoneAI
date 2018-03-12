@@ -6,9 +6,10 @@ import math
 C_VALUE = 0.5
 
 
-def perform_mcts(node, mana, next_round = False):
+def perform_mcts(node, mana, next_round=False):
     selected = select_node(node, node, mana)
     win = simulate(selected, mana)
+
 
 def select_node(parent_node, current_node, mana):
     if current_node['state'].is_terminal:
@@ -56,9 +57,9 @@ def get_best_node(root, nodes):
 
 
 def get_node_value(root, node):
-    return node['wins']/(node['wins'] + node['losses']) \
-           + C_VALUE*(math.sqrt(2*math.log(root['wins'] + root['losses'])
-                                /(node['wins'] + node['losses'])))
+    return node['wins'] / (node['wins'] + node['losses']) \
+           + C_VALUE * (math.sqrt(2 * math.log(root['wins'] + root['losses'])
+                                  / (node['wins'] + node['losses'])))
 
 
 def get_nodes(content):
@@ -73,4 +74,3 @@ def get_nodes(content):
         elem['children'] = []
         result.append(elem)
     return result
-

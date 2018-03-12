@@ -64,19 +64,19 @@ def walk_random(state, current_mana, available_mana, log='', path=''):
 
 
 def walk_attacks_random(state, log='', path=''):
-    available_cards = dict()
+    available_cards = dict() #Why is this a dict not a list?
     for index, card in enumerate(state.current_player.board):
         if isinstance(card, Minion) and not card.summoning_sickness:
             available_cards[index] = card
     cards_to_attack = dict()
     for index, card in enumerate(state.opposite_player.board):
-        if isinstance(card, Minion) and not card.summoning_sickness:
+        if isinstance(card, Minion) and not card.summoning_sickness: #Do cards to attack have to have summoning sickness set to False if we want to attack them?
             cards_to_attack[index] = card
     # combinations of our board cards and opponent cards
     # + options of attacking hero with our cards + not doing anything
     available_actions = (len(available_cards)*(len(cards_to_attack) + 1)) + 1
     attack_options = available_actions - 1
-    if available_actions - 1 > 0 and random.uniform(0, 1) < attack_options / available_actions:
+    if available_actions - 1 > 0 and random.uniform(0, 1) < attack_options / available_actions: #Why jus no andom.uniform(0, 1) < 0.5?
         new_state = deepcopy(state)
         if random.uniform(0, 1) < len(available_cards) / (available_actions - 1):
             index, card = random.choice(list(available_cards.items()))
