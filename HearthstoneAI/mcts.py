@@ -7,10 +7,14 @@ C_VALUE = 0.5
 
 
 def perform_mcts(node):
-    selected = select_node(None, node)
+    node['state'].mana = 3
     for i in range(10):
-        win = simulate(selected, selected['new_turn'])
-        print(win)
+        selected = select_node(None, node)
+        for i in range(10):
+            win = simulate(selected, selected['new_turn'])
+            print(win)
+            backprop(selected, win)
+    print('yahoo')
 
 
 def select_node(parent_node, current_node):
@@ -21,15 +25,16 @@ def select_node(parent_node, current_node):
         if current_node['new_turn']:
             opposite_state.new_turn()
         opposite_state.switch_players()
-        current_node['children'] = get_nodes(get_leafs(opposite_state), new_turn=not current_node['new_turn'])
+        current_node['children'] = get_nodes(content=get_leafs(opposite_state), parent=current_node,
+                                             new_turn=not current_node['new_turn'])
         return current_node['children'][0]
     else:
         possible_options = [x for x in current_node['children'] if x['wins'] == 0 and x['losses'] == 0]
         if possible_options:
             return possible_options[0]
         else:
-            best_child = get_best_node(parent_node, current_node['children'])
-            return select_node(parent_node=parent_node, current_node=best_child)
+            best_child = get_best_node(current_node, current_node['children'])
+            return select_node(parent_node=current_node, current_node=best_child)
 
 
 def simulate(node, new_turn=True):
@@ -48,8 +53,16 @@ def simulate(node, new_turn=True):
                     or (state.current_player.hero.health > 0 and not current_player) else True
 
 
-def expand(node):
-    pass
+def backprop(node, win):
+    while True:
+        if win:
+            node['wins'] += 1
+        else:
+            node['losses'] += 1
+        win = not win
+        node = node['parent']
+        if node is None:
+            break
 
 
 def get_best_node(root, nodes):
@@ -62,7 +75,7 @@ def get_node_value(root, node):
                                   / (node['wins'] + node['losses'])))
 
 
-def get_nodes(content, new_turn):
+def get_nodes(content, parent, new_turn):
     states = set(content)
     result = []
     for item in states:
@@ -73,10 +86,11 @@ def get_nodes(content, new_turn):
         elem['state'] = item[0]
         elem['children'] = []
         elem['new_turn'] = new_turn
+        elem['parent'] = parent
         result.append(elem)
     return result
 
 
-def pamisio_get_nodes(content, new_turn):
+def pamisio_get_nodes(content, parent, new_turn):
     return [{'wins': 0, 'losses': 0, 'path': item[1],
-             'state': item[0], 'children': [], 'new_turn': new_turn} for item in set(content)]
+             'state': item[0], 'children': [], 'new_turn': new_turn, 'parent': parent} for item in set(content)]

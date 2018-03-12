@@ -111,6 +111,6 @@ def walk_attacks(state, leafs, lol='', path=''):
                     walk_attacks(new_state, leafs, lol + '\t', path)
             # newer_state = deepcopy(state)
     path += 'END'
-    # print(lol + 'END')
+    print(path)
     leafs.append((state, path))
     return state, path
