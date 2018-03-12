@@ -74,3 +74,7 @@ def get_nodes(content):
         elem['children'] = []
         result.append(elem)
     return result
+
+
+def pamisio_get_nodes(content):
+    return [{'wins': 0, 'losses': 0, 'path': item[1], 'state': item[0], 'children': []} for item in set(content)]
