@@ -1,19 +1,20 @@
 import numpy as np
 import unittest
 import json
-from deepdiff import DeepDiff
 
 from copy import deepcopy
 
-from HearthstoneAI import action_tree
 from HearthstoneAI import evaluation_utils
-from HearthstoneAI.action_tree import walk, get_leafs, get_new_state
+from HearthstoneAI.action_tree import get_new_state, get_random_state
 from HearthstoneAI.actions_generation import get_cards_play_combinations, get_cards_to_play
 from HearthstoneAI.cards import Hero
 from HearthstoneAI.cards_generator import card_from_json
-from HearthstoneAI.mcts import perform_mcts
+from HearthstoneAI.mcts import select_node, sim, back_propagation
 from HearthstoneAI.state import Player, State
 from settings import CARDS_FILE
+
+i = 0
+color = True
 
 
 class TestActions(unittest.TestCase):
@@ -90,11 +91,151 @@ class TestActions(unittest.TestCase):
         for card in self.state.current_player.board:
             card.summoning_sickness = False
         self.state.opposite_player.hand = [deepcopy(self.abusive_sergeant), deepcopy(self.agent_squire),
-                                            deepcopy(self.selfless_hero), deepcopy(self.divine_strength)]
+                                           deepcopy(self.selfless_hero), deepcopy(self.divine_strength)]
         self.state.opposite_player.board = [deepcopy(self.abusive_sergeant), deepcopy(self.selfless_hero),
-                                           deepcopy(self.steward_of_darshire)]
-        # new_state, path = action_tree.walk_random(self.state, 0, 3)
-        # print(path)
+                                            deepcopy(self.steward_of_darshire)]
 
-        perform_mcts({'wins': 0, 'losses': 0, 'state': self.state,
-                      'children': [], 'path': '', 'new_turn': True, 'parent': None})
+        self.state.current_player.mana = 1
+        np.random.seed(0)
+        s, p = get_random_state(self.state)
+        print(p)
+
+    def test_mtcs(self):
+        deck1 = [deepcopy(self.selfless_hero),
+                 deepcopy(self.divine_favor),
+                 deepcopy(self.abusive_sergeant),
+                 deepcopy(self.agent_squire),
+                 deepcopy(self.seal_of_champions),
+                 deepcopy(self.steward_of_darshire),
+                 deepcopy(self.blessing_of_kings),
+                 deepcopy(self.divine_strength),
+                 deepcopy(self.wolfrider),
+                 deepcopy(self.defender_of_argus)]
+
+        deck2 = [deepcopy(self.abusive_sergeant),
+                 deepcopy(self.defender_of_argus),
+                 deepcopy(self.divine_favor),
+                 deepcopy(self.seal_of_champions),
+                 deepcopy(self.agent_squire),
+                 deepcopy(self.divine_strength),
+                 deepcopy(self.selfless_hero),
+                 deepcopy(self.blessing_of_kings),
+                 deepcopy(self.wolfrider),
+                 deepcopy(self.steward_of_darshire)]
+        deck1 = deck1[::-1]
+        deck2 = deck2[::-1]
+
+        self.first_player.deck = deck1
+        self.second_player.deck = deck2
+
+        self.state.draw_card()
+        self.state.draw_card()
+        self.state.switch_players()
+
+        self.state.draw_card()
+        self.state.draw_card()
+        self.state.draw_card()
+        self.state.switch_players()
+
+        self.assertEqual(len(self.state.current_player.hand), 2)
+        self.assertEqual(len(self.state.current_player.board), 0)
+        self.assertEqual(len(self.state.current_player.graveyard), 0)
+
+        self.assertEqual(len(self.state.opposite_player.hand), 3)
+        self.assertEqual(len(self.state.opposite_player.board), 0)
+        self.assertEqual(len(self.state.opposite_player.graveyard), 0)
+
+        self.assertEqual(self.state.current_player.mana, 1)
+
+        np.random.seed(0)
+
+        root = {'wins': 0,
+                'losses': 0,
+                'state': self.state,
+                'children': [],
+                'path': '',
+                'parent': None}
+        import graphviz as gv
+
+        graph = gv.Graph(format='svg')
+        graph.node(name=str(0), label="{} / {}".format(root['wins'], root['wins'] + root['losses']), color=get_color(color))
+        graph.render(filename='graph_{}'.format(0))
+
+        for k in range(1, 30):
+            selected = select_node(None, root)
+            win = sim(selected)
+            back_propagation(selected, win)
+            print("Win = {}".format(win))
+
+            i = 0
+            graph = gv.Graph(format='svg')
+            graph.node(name=str(i), label="{} / {}".format(root['wins'], root['wins'] + root['losses']), color=get_color(color))
+            graph.render(filename='graph_{}'.format(k))
+            for child in root['children']:
+                if child['wins'] + child['losses'] > 0:
+                    preorder(node=child, graph=graph, parent_name=i, parent_color=color)
+            graph.render(filename='graph_{}'.format(k))
+
+
+        # perform_mcts({'wins': 0, 'losses': 0, 'state': self.state,
+        #               'children': [], 'path': '', 'new_turn': True, 'parent': None})
+
+        #
+        # root['children'][0]['children'] = [{'wins': 0,
+        #                                     'losses': 0,
+        #                                     'state': self.state,
+        #                                     'children': [],
+        #                                     'path': '',
+        #                                     'parent': None}, {'wins': 0,
+        #                                                       'losses': 0,
+        #                                                       'state': self.state,
+        #                                                       'children': [],
+        #                                                       'path': '',
+        #                                                       'parent': None}]
+        #
+        # root['children'][1]['children'] = [{'wins': 0,
+        #                                     'losses': 0,
+        #                                     'state': self.state,
+        #                                     'children': [],
+        #                                     'path': '',
+        #                                     'parent': None},
+        #                                    {'wins': 0,
+        #                                     'losses': 0,
+        #                                     'state': self.state,
+        #                                     'children': [],
+        #                                     'path': '',
+        #                                     'parent': None}]
+        #
+        # root['children'][1]['children'][0]['children'] = [{'wins': 0,
+        #                                     'losses': 0,
+        #                                     'state': self.state,
+        #                                     'children': [],
+        #                                     'path': '',
+        #                                     'parent': None},
+        #                                    {'wins': 0,
+        #                                     'losses': 0,
+        #                                     'state': self.state,
+        #                                     'children': [],
+        #                                     'path': '',
+        #                                     'parent': None}]
+        #
+
+
+def get_color(parent_color):
+    return 'green' if parent_color else 'red'
+
+
+def preorder(node, graph, parent_name, parent_color):
+    global i
+    global color
+    i += 1
+    new_parent = i
+    new_parent_color = not parent_color
+    s = "{} / {}".format(node['wins'], node['wins'] + node['losses'])
+    # print("Node = {}, parent = {}".format(i, parent))
+    graph.node(name=str(i), label=s, color=get_color(not parent_color))
+    graph.edge(str(parent_name), str(i))
+    for n in node['children']:
+        if n['wins'] + n['losses'] > 0:
+            preorder(n, graph, new_parent, new_parent_color)
+

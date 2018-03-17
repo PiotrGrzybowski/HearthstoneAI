@@ -15,6 +15,7 @@ class Player:
         self.board = board
         self.graveyard = graveyard
         self.fatigue = 0
+        self.mana = 1
 
     def put_down_card(self, card):
         if isinstance(card, Minion):
@@ -54,6 +55,14 @@ class Player:
     def is_dead(self):
         return self.hero.health <= 0
 
+    @property
+    def health(self):
+        return max(0, self.hero.health)
+
+    @property
+    def name(self):
+        return self.hero.name
+
     def __hash__(self):
         return hash((tuple(self.board), tuple(self.deck), self.fatigue,
                      tuple(self.graveyard), tuple(self.hand), self.hero))
@@ -88,8 +97,6 @@ class State:
             self.apply_abilities(card)
             self.current_player.put_down_card(card)
             self.current_player.hand.remove(card)
-
-
 
     @staticmethod
     def battle(attacking_card, attacked_card):
@@ -132,6 +139,15 @@ class State:
         self.draw_card()
         self.switch_players()
         self.draw_card()
+
+    def new_turn_for_one_player(self):
+        self.switch_players()
+        self.update_mana()
+        self.disable_sickness()
+        self.draw_card()
+
+    def update_mana(self):
+        self.current_player.mana = min(10, self.current_player.mana + 1)
 
     @property
     def is_terminal(self):

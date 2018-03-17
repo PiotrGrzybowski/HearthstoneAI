@@ -5,10 +5,9 @@ from HearthstoneAI import evaluation_utils
 from HearthstoneAI.action_tree import get_new_state, get_random_state, get_leafs
 from HearthstoneAI.cards import Hero
 from HearthstoneAI.cards_generator import card_from_json
-from HearthstoneAI.mcts import uniquify
 from HearthstoneAI.state import Player, State
 from settings import CARDS_FILE
-
+import numpy as np
 
 def deals_manage_to_opposite_player(state, damage):
     state.opposite_player.hero.health -= damage

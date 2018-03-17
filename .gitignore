@@ -102,3 +102,4 @@ ENV/
 .idea/
 
 user_settings.py
+.DS_Store
