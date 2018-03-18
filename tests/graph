@@ -1,0 +1,401 @@
+graph {
+	0 [label="128 / 199" color=green]
+	19702 [label="8 / 35" color=red]
+	0 -- 19702
+	19703 [label="16 / 20" color=green]
+	19702 -- 19703
+	19704 [label="0 / 4" color=red]
+	19703 -- 19704
+	19705 [label="2 / 2" color=green]
+	19704 -- 19705
+	19706 [label="0 / 1" color=red]
+	19705 -- 19706
+	19707 [label="1 / 1" color=green]
+	19704 -- 19707
+	19708 [label="0 / 4" color=red]
+	19703 -- 19708
+	19709 [label="1 / 1" color=green]
+	19708 -- 19709
+	19710 [label="1 / 1" color=green]
+	19708 -- 19710
+	19711 [label="1 / 1" color=green]
+	19708 -- 19711
+	19712 [label="2 / 5" color=red]
+	19703 -- 19712
+	19713 [label="1 / 2" color=green]
+	19712 -- 19713
+	19714 [label="1 / 1" color=red]
+	19713 -- 19714
+	19715 [label="1 / 2" color=green]
+	19712 -- 19715
+	19716 [label="1 / 1" color=red]
+	19715 -- 19716
+	19717 [label="1 / 6" color=red]
+	19703 -- 19717
+	19718 [label="3 / 3" color=green]
+	19717 -- 19718
+	19719 [label="0 / 1" color=red]
+	19718 -- 19719
+	19720 [label="0 / 1" color=red]
+	19718 -- 19720
+	19721 [label="2 / 2" color=green]
+	19717 -- 19721
+	19722 [label="0 / 1" color=red]
+	19721 -- 19722
+	19723 [label="11 / 14" color=green]
+	19702 -- 19723
+	19724 [label="1 / 7" color=red]
+	19723 -- 19724
+	19725 [label="0 / 1" color=green]
+	19724 -- 19725
+	19726 [label="2 / 2" color=green]
+	19724 -- 19726
+	19727 [label="0 / 1" color=red]
+	19726 -- 19727
+	19728 [label="2 / 2" color=green]
+	19724 -- 19728
+	19729 [label="0 / 1" color=red]
+	19728 -- 19729
+	19730 [label="1 / 1" color=green]
+	19724 -- 19730
+	19731 [label="1 / 6" color=red]
+	19723 -- 19731
+	19732 [label="2 / 2" color=green]
+	19731 -- 19732
+	19733 [label="0 / 1" color=red]
+	19732 -- 19733
+	19734 [label="1 / 1" color=green]
+	19731 -- 19734
+	19735 [label="0 / 1" color=green]
+	19731 -- 19735
+	19736 [label="1 / 1" color=green]
+	19731 -- 19736
+	19737 [label="63 / 164" color=red]
+	0 -- 19737
+	19738 [label="0 / 5" color=green]
+	19737 -- 19738
+	19739 [label="2 / 2" color=red]
+	19738 -- 19739
+	19740 [label="0 / 1" color=green]
+	19739 -- 19740
+	19741 [label="2 / 2" color=red]
+	19738 -- 19741
+	19742 [label="0 / 1" color=green]
+	19741 -- 19742
+	19743 [label="100 / 158" color=green]
+	19737 -- 19743
+	19744 [label="1 / 13" color=red]
+	19743 -- 19744
+	19745 [label="0 / 1" color=green]
+	19744 -- 19745
+	19746 [label="11 / 11" color=green]
+	19744 -- 19746
+	19747 [label="0 / 3" color=red]
+	19746 -- 19747
+	19748 [label="1 / 1" color=green]
+	19747 -- 19748
+	19749 [label="1 / 1" color=green]
+	19747 -- 19749
+	19750 [label="0 / 3" color=red]
+	19746 -- 19750
+	19751 [label="1 / 1" color=green]
+	19750 -- 19751
+	19752 [label="1 / 1" color=green]
+	19750 -- 19752
+	19753 [label="0 / 2" color=red]
+	19746 -- 19753
+	19754 [label="1 / 1" color=green]
+	19753 -- 19754
+	19755 [label="0 / 2" color=red]
+	19746 -- 19755
+	19756 [label="1 / 1" color=green]
+	19755 -- 19756
+	19757 [label="56 / 144" color=red]
+	19743 -- 19757
+	19758 [label="15 / 27" color=green]
+	19757 -- 19758
+	19759 [label="3 / 10" color=red]
+	19758 -- 19759
+	19760 [label="0 / 1" color=green]
+	19759 -- 19760
+	19761 [label="0 / 1" color=green]
+	19759 -- 19761
+	19762 [label="0 / 1" color=green]
+	19759 -- 19762
+	19763 [label="6 / 6" color=green]
+	19759 -- 19763
+	19764 [label="0 / 1" color=red]
+	19763 -- 19764
+	19765 [label="0 / 1" color=red]
+	19763 -- 19765
+	19766 [label="0 / 1" color=red]
+	19763 -- 19766
+	19767 [label="0 / 1" color=red]
+	19763 -- 19767
+	19768 [label="0 / 1" color=red]
+	19763 -- 19768
+	19769 [label="9 / 16" color=red]
+	19758 -- 19769
+	19770 [label="0 / 2" color=green]
+	19769 -- 19770
+	19771 [label="1 / 1" color=red]
+	19770 -- 19771
+	19772 [label="0 / 2" color=green]
+	19769 -- 19772
+	19773 [label="1 / 1" color=red]
+	19772 -- 19773
+	19774 [label="5 / 8" color=green]
+	19769 -- 19774
+	19775 [label="0 / 1" color=red]
+	19774 -- 19775
+	19776 [label="0 / 1" color=red]
+	19774 -- 19776
+	19777 [label="3 / 4" color=red]
+	19774 -- 19777
+	19778 [label="1 / 1" color=green]
+	19777 -- 19778
+	19779 [label="0 / 1" color=green]
+	19777 -- 19779
+	19780 [label="0 / 1" color=green]
+	19777 -- 19780
+	19781 [label="0 / 1" color=red]
+	19774 -- 19781
+	19782 [label="1 / 3" color=green]
+	19769 -- 19782
+	19783 [label="1 / 1" color=red]
+	19782 -- 19783
+	19784 [label="1 / 1" color=red]
+	19782 -- 19784
+	19785 [label="51 / 74" color=green]
+	19757 -- 19785
+	19786 [label="3 / 12" color=red]
+	19785 -- 19786
+	19787 [label="7 / 8" color=green]
+	19786 -- 19787
+	19788 [label="0 / 2" color=red]
+	19787 -- 19788
+	19789 [label="1 / 1" color=green]
+	19788 -- 19789
+	19790 [label="1 / 3" color=red]
+	19787 -- 19790
+	19791 [label="1 / 1" color=green]
+	19790 -- 19791
+	19792 [label="1 / 1" color=green]
+	19790 -- 19792
+	19793 [label="0 / 1" color=red]
+	19787 -- 19793
+	19794 [label="0 / 1" color=red]
+	19787 -- 19794
+	19795 [label="2 / 3" color=green]
+	19786 -- 19795
+	19796 [label="1 / 1" color=red]
+	19795 -- 19796
+	19797 [label="0 / 1" color=red]
+	19795 -- 19797
+	19798 [label="14 / 32" color=red]
+	19785 -- 19798
+	19799 [label="10 / 18" color=green]
+	19798 -- 19799
+	19800 [label="1 / 3" color=red]
+	19799 -- 19800
+	19801 [label="1 / 1" color=green]
+	19800 -- 19801
+	19802 [label="1 / 1" color=green]
+	19800 -- 19802
+	19803 [label="0 / 1" color=red]
+	19799 -- 19803
+	19804 [label="0 / 1" color=red]
+	19799 -- 19804
+	19805 [label="0 / 1" color=red]
+	19799 -- 19805
+	19806 [label="3 / 5" color=red]
+	19799 -- 19806
+	19807 [label="2 / 3" color=green]
+	19806 -- 19807
+	19808 [label="0 / 1" color=red]
+	19807 -- 19808
+	19809 [label="0 / 1" color=red]
+	19807 -- 19809
+	19810 [label="0 / 1" color=green]
+	19806 -- 19810
+	19811 [label="0 / 1" color=red]
+	19799 -- 19811
+	19812 [label="3 / 4" color=red]
+	19799 -- 19812
+	19813 [label="1 / 2" color=green]
+	19812 -- 19813
+	19814 [label="1 / 1" color=red]
+	19813 -- 19814
+	19815 [label="0 / 1" color=green]
+	19812 -- 19815
+	19816 [label="0 / 1" color=red]
+	19799 -- 19816
+	19817 [label="8 / 13" color=green]
+	19798 -- 19817
+	19818 [label="1 / 2" color=red]
+	19817 -- 19818
+	19819 [label="1 / 1" color=green]
+	19818 -- 19819
+	19820 [label="0 / 1" color=red]
+	19817 -- 19820
+	19821 [label="0 / 1" color=red]
+	19817 -- 19821
+	19822 [label="1 / 2" color=red]
+	19817 -- 19822
+	19823 [label="1 / 1" color=green]
+	19822 -- 19823
+	19824 [label="0 / 1" color=red]
+	19817 -- 19824
+	19825 [label="0 / 1" color=red]
+	19817 -- 19825
+	19826 [label="2 / 3" color=red]
+	19817 -- 19826
+	19827 [label="0 / 1" color=green]
+	19826 -- 19827
+	19828 [label="1 / 1" color=green]
+	19826 -- 19828
+	19829 [label="0 / 1" color=red]
+	19817 -- 19829
+	19830 [label="3 / 12" color=red]
+	19785 -- 19830
+	19831 [label="8 / 10" color=green]
+	19830 -- 19831
+	19832 [label="0 / 1" color=red]
+	19831 -- 19832
+	19833 [label="1 / 1" color=red]
+	19831 -- 19833
+	19834 [label="0 / 1" color=red]
+	19831 -- 19834
+	19835 [label="0 / 1" color=red]
+	19831 -- 19835
+	19836 [label="0 / 1" color=red]
+	19831 -- 19836
+	19837 [label="0 / 1" color=red]
+	19831 -- 19837
+	19838 [label="1 / 1" color=red]
+	19831 -- 19838
+	19839 [label="0 / 1" color=red]
+	19831 -- 19839
+	19840 [label="0 / 1" color=red]
+	19831 -- 19840
+	19841 [label="0 / 1" color=green]
+	19830 -- 19841
+	19842 [label="2 / 10" color=red]
+	19785 -- 19842
+	19843 [label="1 / 2" color=green]
+	19842 -- 19843
+	19844 [label="1 / 1" color=red]
+	19843 -- 19844
+	19845 [label="6 / 7" color=green]
+	19842 -- 19845
+	19846 [label="0 / 1" color=red]
+	19845 -- 19846
+	19847 [label="1 / 1" color=red]
+	19845 -- 19847
+	19848 [label="0 / 1" color=red]
+	19845 -- 19848
+	19849 [label="0 / 1" color=red]
+	19845 -- 19849
+	19850 [label="0 / 1" color=red]
+	19845 -- 19850
+	19851 [label="0 / 1" color=red]
+	19845 -- 19851
+	19852 [label="1 / 7" color=red]
+	19785 -- 19852
+	19853 [label="3 / 3" color=green]
+	19852 -- 19853
+	19854 [label="0 / 1" color=red]
+	19853 -- 19854
+	19855 [label="0 / 1" color=red]
+	19853 -- 19855
+	19856 [label="3 / 3" color=green]
+	19852 -- 19856
+	19857 [label="0 / 1" color=red]
+	19856 -- 19857
+	19858 [label="0 / 1" color=red]
+	19856 -- 19858
+	19859 [label="3 / 9" color=green]
+	19757 -- 19859
+	19860 [label="0 / 1" color=red]
+	19859 -- 19860
+	19861 [label="0 / 1" color=red]
+	19859 -- 19861
+	19862 [label="3 / 3" color=red]
+	19859 -- 19862
+	19863 [label="0 / 1" color=green]
+	19862 -- 19863
+	19864 [label="0 / 1" color=green]
+	19862 -- 19864
+	19865 [label="0 / 1" color=red]
+	19859 -- 19865
+	19866 [label="2 / 2" color=red]
+	19859 -- 19866
+	19867 [label="0 / 1" color=green]
+	19866 -- 19867
+	19868 [label="19 / 33" color=green]
+	19757 -- 19868
+	19869 [label="8 / 22" color=red]
+	19868 -- 19869
+	19870 [label="0 / 2" color=green]
+	19869 -- 19870
+	19871 [label="1 / 1" color=red]
+	19870 -- 19871
+	19872 [label="2 / 3" color=green]
+	19869 -- 19872
+	19873 [label="0 / 1" color=red]
+	19872 -- 19873
+	19874 [label="0 / 1" color=red]
+	19872 -- 19874
+	19875 [label="10 / 12" color=green]
+	19869 -- 19875
+	19876 [label="1 / 2" color=red]
+	19875 -- 19876
+	19877 [label="0 / 1" color=green]
+	19876 -- 19877
+	19878 [label="0 / 1" color=red]
+	19875 -- 19878
+	19879 [label="0 / 1" color=red]
+	19875 -- 19879
+	19880 [label="0 / 1" color=red]
+	19875 -- 19880
+	19881 [label="0 / 1" color=red]
+	19875 -- 19881
+	19882 [label="0 / 1" color=red]
+	19875 -- 19882
+	19883 [label="1 / 3" color=red]
+	19875 -- 19883
+	19884 [label="1 / 1" color=green]
+	19883 -- 19884
+	19885 [label="1 / 1" color=green]
+	19883 -- 19885
+	19886 [label="0 / 1" color=red]
+	19875 -- 19886
+	19887 [label="2 / 4" color=green]
+	19869 -- 19887
+	19888 [label="0 / 1" color=red]
+	19887 -- 19888
+	19889 [label="1 / 1" color=red]
+	19887 -- 19889
+	19890 [label="1 / 1" color=red]
+	19887 -- 19890
+	19891 [label="5 / 10" color=red]
+	19868 -- 19891
+	19892 [label="2 / 4" color=green]
+	19891 -- 19892
+	19893 [label="0 / 1" color=red]
+	19892 -- 19893
+	19894 [label="1 / 1" color=red]
+	19892 -- 19894
+	19895 [label="1 / 1" color=red]
+	19892 -- 19895
+	19896 [label="1 / 2" color=green]
+	19891 -- 19896
+	19897 [label="1 / 1" color=red]
+	19896 -- 19897
+	19898 [label="1 / 2" color=green]
+	19891 -- 19898
+	19899 [label="1 / 1" color=red]
+	19898 -- 19899
+	19900 [label="0 / 1" color=green]
+	19891 -- 19900
+}

@@ -1,6 +1,8 @@
 import random
 from functools import partial
 
+from HearthstoneAI.cards import Minion
+
 DIVINE_SHIELD = 'divine_shield'
 CHARGE = 'charge'
 DEATHRATTLE = 'deathrattle'
@@ -102,3 +104,33 @@ ABILITIES = {'add_specs_to_own_minion_for_turn': add_specs_to_own_minion_for_tur
              'draw_cards_to_match_opponent': draw_cards_to_match_opponent,
              'add_divine_shield_and_specs_to_own_minion': add_divine_shield_and_specs_to_own_minion,
              'add_taunt_and_specs_to_own_minion': add_taunt_and_specs_to_own_minion}
+
+
+def get_static_abi(card):
+    result = []
+    if TAUNT in card.abilities:
+        result.append('Taunt')
+    if CHARGE in card.abilities:
+        result.append('Charge')
+    if DIVINE_SHIELD in card.abilities:
+        result.append('Divine Shield')
+    return ' '.join(result)
+
+
+def get_dynamic_abi(card):
+    if 'add_specs' in list(card.abilities.keys())[0]:
+        ab = next(iter(card.abilities.values()))
+        return 'Give {} / {} '.format(ab.keywords['attack'], ab.keywords['health'])
+    if 'add_taunt' in list(card.abilities.keys())[0]:
+        return 'Give Taunt'
+    if 'add_divine' in list(card.abilities.keys())[0]:
+        return 'Give Divine Shield'
+    if 'draw' in list(card.abilities.keys())[0]:
+        return 'Draw 3 cards'
+
+
+def get_desc(card):
+    if isinstance(card, Minion):
+        return '{} / {}'.format(card.attack, card.health)
+    else:
+        return get_dynamic_abi(card)

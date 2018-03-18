@@ -1,3 +1,5 @@
+import numpy as np
+
 from deepdiff import DeepDiff
 
 from HearthstoneAI.abilities import check_divine_shield, CHARGE
@@ -15,7 +17,7 @@ class Player:
         self.board = board
         self.graveyard = graveyard
         self.fatigue = 0
-        self.mana = 1
+        self.mana = 0
 
     def put_down_card(self, card):
         if isinstance(card, Minion):
@@ -38,10 +40,11 @@ class Player:
             self.board.remove(card)
 
     def draw_card(self):
+        index = np.random.randint(len(self.deck))
         if len(self.hand) < MAX_HAND_SIZE:
-            self.hand.append(self.deck.pop())
+            self.hand.append(self.deck.pop(index))
         else:
-            self.graveyard.append(self.deck.pop())
+            self.graveyard.append(self.deck.pop(index))
 
     def apply_fatigue(self, amount=1):
         self.fatigue += amount
@@ -160,6 +163,9 @@ class State:
         for _, ability in self.compensation_abilities.items():
             ability(self)
         self.compensation_abilities = {}
+
+    def get_player_by_name(self, name):
+        return self.current_player if self.current_player.name == name else self.opposite_player
 
     def __hash__(self):
         return hash((self.current_player,

@@ -5,6 +5,7 @@ import json
 from copy import deepcopy
 
 from HearthstoneAI import evaluation_utils
+from HearthstoneAI.abilities import get_static_abi, get_dynamic_abi, get_desc
 from HearthstoneAI.action_tree import get_new_state, get_random_state
 from HearthstoneAI.actions_generation import get_cards_play_combinations, get_cards_to_play
 from HearthstoneAI.cards import Hero
@@ -145,9 +146,6 @@ class TestActions(unittest.TestCase):
         self.assertEqual(len(self.state.opposite_player.board), 0)
         self.assertEqual(len(self.state.opposite_player.graveyard), 0)
 
-        self.assertEqual(self.state.current_player.mana, 1)
-
-        np.random.seed(0)
 
         root = {'wins': 0,
                 'losses': 0,
@@ -161,7 +159,7 @@ class TestActions(unittest.TestCase):
         graph.node(name=str(0), label="{} / {}".format(root['wins'], root['wins'] + root['losses']), color=get_color(color))
         graph.render(filename='graph_{}'.format(0))
 
-        for k in range(1, 30):
+        for k in range(1, 200):
             selected = select_node(None, root)
             win = sim(selected)
             back_propagation(selected, win)
@@ -170,55 +168,32 @@ class TestActions(unittest.TestCase):
             i = 0
             graph = gv.Graph(format='svg')
             graph.node(name=str(i), label="{} / {}".format(root['wins'], root['wins'] + root['losses']), color=get_color(color))
-            graph.render(filename='graph_{}'.format(k))
+            # graph.render(filename='graph_{}'.format(k))
             for child in root['children']:
                 if child['wins'] + child['losses'] > 0:
                     preorder(node=child, graph=graph, parent_name=i, parent_color=color)
-            graph.render(filename='graph_{}'.format(k))
+        graph.render(filename='graph')
 
+    def test_gui(self):
+        self.state.current_player.hand = [self.abusive_sergeant, self.agent_squire,
+                                          self.selfless_hero, self.divine_strength]
+        self.state.current_player.board = [deepcopy(self.abusive_sergeant), deepcopy(self.selfless_hero),
+                                           deepcopy(self.steward_of_darshire)]
 
-        # perform_mcts({'wins': 0, 'losses': 0, 'state': self.state,
-        #               'children': [], 'path': '', 'new_turn': True, 'parent': None})
+        from beautifultable import BeautifulTable
 
-        #
-        # root['children'][0]['children'] = [{'wins': 0,
-        #                                     'losses': 0,
-        #                                     'state': self.state,
-        #                                     'children': [],
-        #                                     'path': '',
-        #                                     'parent': None}, {'wins': 0,
-        #                                                       'losses': 0,
-        #                                                       'state': self.state,
-        #                                                       'children': [],
-        #                                                       'path': '',
-        #                                                       'parent': None}]
-        #
-        # root['children'][1]['children'] = [{'wins': 0,
-        #                                     'losses': 0,
-        #                                     'state': self.state,
-        #                                     'children': [],
-        #                                     'path': '',
-        #                                     'parent': None},
-        #                                    {'wins': 0,
-        #                                     'losses': 0,
-        #                                     'state': self.state,
-        #                                     'children': [],
-        #                                     'path': '',
-        #                                     'parent': None}]
-        #
-        # root['children'][1]['children'][0]['children'] = [{'wins': 0,
-        #                                     'losses': 0,
-        #                                     'state': self.state,
-        #                                     'children': [],
-        #                                     'path': '',
-        #                                     'parent': None},
-        #                                    {'wins': 0,
-        #                                     'losses': 0,
-        #                                     'state': self.state,
-        #                                     'children': [],
-        #                                     'path': '',
-        #                                     'parent': None}]
-        #
+        table = BeautifulTable()
+
+        for card in self.state.current_player.hand:
+            table.append_column(card.name, ['Cost = {}'.format(card.cost), get_static_abi(card), get_desc(card)])
+        print(table)
+
+        print('\n')
+        table = BeautifulTable()
+        for card in self.state.current_player.board:
+            table.append_column(card.name, [get_static_abi(card), get_desc(card)])
+
+        print(table)
 
 
 def get_color(parent_color):

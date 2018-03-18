@@ -73,7 +73,7 @@
   {
     "name": "Divine Favor",
     "type": "Spell",
-    "cost": 3,
+    "cost": 2,
     "text": "Draw cards until you have as many in hand as your opponent.",
     "playerClass": "Paladin",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/EX1_349.png",
@@ -89,7 +89,7 @@
   {
     "name": "Seal of Champions",
     "type": "Spell",
-    "cost": 3,
+    "cost": 2,
     "text": "Give a minion +3 Attack and <b>Divine Shield</b>.",
     "playerClass": "Paladin",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/AT_074.png",
@@ -105,7 +105,7 @@
   {
     "name": "Steward of Darkshire",
     "type": "Minion",
-    "cost": 3,
+    "cost": 2,
     "attack": 3,
     "health": 3,
     "minion_type": null,
@@ -124,7 +124,7 @@
   {
     "name": "Wolfrider",
     "type": "Minion",
-    "cost": 3,
+    "cost": 2,
     "attack": 3,
     "health": 1,
     "minion_type": null,
@@ -143,7 +143,7 @@
   {
     "name": "Blessing of Kings",
     "type": "Spell",
-    "cost": 4,
+    "cost": 3,
     "text": "Give a minion +4/+4.",
     "playerClass": "Paladin",
     "img": "http://media.services.zam.com/v1/media/byName/hs/cards/enus/CS2_092.png",
@@ -159,7 +159,7 @@
   {
     "name": "Defender of Argus",
     "type": "Minion",
-    "cost": 4,
+    "cost": 3,
     "attack": 2,
     "health": 3,
     "minion_type": null,

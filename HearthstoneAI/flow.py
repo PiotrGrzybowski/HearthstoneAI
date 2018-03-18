@@ -5,9 +5,12 @@ from HearthstoneAI import evaluation_utils
 from HearthstoneAI.action_tree import get_new_state, get_random_state, get_leafs
 from HearthstoneAI.cards import Hero
 from HearthstoneAI.cards_generator import card_from_json
+from HearthstoneAI.gui import print_state
+from HearthstoneAI.mcts import perform_mcts, get_node_from_state
 from HearthstoneAI.state import Player, State
 from settings import CARDS_FILE
 import numpy as np
+
 
 def deals_manage_to_opposite_player(state, damage):
     state.opposite_player.hero.health -= damage
@@ -137,5 +140,36 @@ def random_playoff():
             break
 
 
+def play():
+    deck1, deck2 = build_decks()
+    hero_1 = Hero(name='Agent', cost=0, abilities=dict(), attack=0, health=20, hero_class=None)
+    hero_2 = Hero(name='MCTS', cost=0, abilities=dict(), attack=0, health=20, hero_class=None)
+
+    first_player = Player(hero_1, [], deck1, [], [])
+    second_player = Player(hero_2, [], deck2, [], [])
+    state = State(first_player, second_player)
+
+    state.draw_card()
+    state.draw_card()
+    state.switch_players()
+
+    state.draw_card()
+    state.draw_card()
+    state.draw_card()
+
+    while not state.is_terminal:
+        state.new_turn_for_one_player()
+        state, path = get_random_state(state)
+        print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
+        print_state(state.get_player_by_name(hero_1.name), state.get_player_by_name(hero_2.name))
+        if state.is_terminal:
+            break
+
+        state, path = perform_mcts(get_node_from_state(state))
+        print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
+        print_state(state.get_player_by_name(hero_1.name), state.get_player_by_name(hero_2.name))
+
+    print_state(state.get_player_by_name(hero_1.name), state.get_player_by_name(hero_2.name))
+
 if __name__ == "__main__":
-    random_playoff()
+    play()

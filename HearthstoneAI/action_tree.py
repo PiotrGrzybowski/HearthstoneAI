@@ -22,7 +22,7 @@ def get_new_state(state, available_mana, evaluation_function):
             best_state = elem[0]
             path = elem[1]
             max = evaluation
-    print("Path = {}".format(path))
+    # print("Path = {}".format(path))
     return best_state
 
 
@@ -94,19 +94,22 @@ def walk_attacks_random(state, log='', path=''):
 
 def walk_attacks(state, leafs, lol='', path=''):
     for index, card in enumerate(state.current_player.board):
-        current_card = state.current_player.board[index]
-        if can_attack(current_card):
+        if isinstance(card, Minion) and not card.summoning_sickness:
             new_state = deepcopy(state)
+            current_card = new_state.current_player.board[index]
             if current_card in new_state.current_player.board and not current_card.summoning_sickness:
-                new_path = path + 'Attacking HERO with ' + card.name + ' -> '
+                path += 'Attacking HERO with ' + card.name + ' -> '
+                # print(lol + 'Attacking HERO with ' + card.name)
                 new_state.attack_hero_by_ref(current_card)
-                walk_attacks(new_state, leafs, lol + '\t', new_path)
+                walk_attacks(new_state, leafs, lol + '\t', path)
             for opponent_card in new_state.opposite_player.board:
-                if is_minion(opponent_card):
-                    new_path = path + 'battling ' + card.name + ' and ' + opponent_card.name + ' -> '
+                if isinstance(opponent_card, Minion) and not current_card.summoning_sickness:
+                    path += 'battling ' + card.name + ' and ' + opponent_card.name + ' -> '
+                    # print(lol + 'battling ' + card.name + ' and ' + opponent_card.name)
                     new_state.attack_by_ref(new_state.current_player.board[index], opponent_card)
-                    walk_attacks(new_state, leafs, lol + '\t', new_path)
+                    walk_attacks(new_state, leafs, lol + '\t', path)
+            # newer_state = deepcopy(state)
     path += 'END'
-    print(path)
+    # print(path)
     leafs.append((state, path))
     return state, path
