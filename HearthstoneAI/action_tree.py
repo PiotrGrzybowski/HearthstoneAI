@@ -1,7 +1,9 @@
 from copy import deepcopy
 import random
 
-from HearthstoneAI.cards import Minion
+from HearthstoneAI.cards import Minion, Spell
+
+MAX_MINIONS = 7
 
 
 def get_leafs(state):
@@ -12,8 +14,8 @@ def get_leafs(state):
     return leafs
 
 
-def get_new_state(state, available_mana, evaluation_function):
-    leafs = get_leafs(state, available_mana)
+def get_new_state(state, evaluation_function):
+    leafs = get_leafs(state)
     best_state = state
     max = evaluation_function(best_state)
     path = ''
@@ -25,7 +27,7 @@ def get_new_state(state, available_mana, evaluation_function):
             path = elem[1]
             max = evaluation
     # print("Path = {}".format(path))
-    return best_state
+    return best_state, path
 
 
 def get_random_state(state):
@@ -37,7 +39,9 @@ def walk(state, current_mana, available_mana, leafs, lol='', path=''):
     if not state.current_player.hand:
         return walk_attacks(state, leafs, lol, path)
     for index, card in enumerate(state.current_player.hand):
-        if card.cost + current_mana <= available_mana:
+        if card.cost + current_mana <= available_mana \
+                and ((is_minion(card) and len(state.current_player.board) < MAX_MINIONS)
+                     or isinstance(card, Spell)):
             new_state = deepcopy(state)
             new_path = path + 'Play ' + card.name + ' -> '
             # print(lol + 'Play ' + card.name)
@@ -56,9 +60,11 @@ def walk_random(state, current_mana, available_mana, log='', path=''):
     if random.uniform(0, 1) < len(available_cards) / (len(available_cards) + 1):
         new_state = deepcopy(state)
         index, card = random.choice(list(available_cards.items()))
-        new_path = path + 'Play ' + card.name + ' -> '
-        new_state.play_card(index)
-        state, path = walk_random(new_state, current_mana + card.cost, available_mana, log + '\t', new_path)
+        if (is_minion(card) and len(new_state.current_player.board) < MAX_MINIONS) \
+                or isinstance(card, Spell):
+            new_path = path + 'Play ' + card.name + ' -> '
+            new_state.play_card(index)
+            state, path = walk_random(new_state, current_mana + card.cost, available_mana, log + '\t', new_path)
     return walk_attacks_random(state, log, path)
 
 

@@ -9,7 +9,7 @@ C_VALUE = 0.8
 def perform_mcts(node):
     # node['state'].switch_players()
     # node['state'].opposite_player.mana -= 1
-    for i in range(200):
+    for i in range(300):
         selected = select_node(None, node)
         win = sim(selected)
         back_propagation(selected, win)

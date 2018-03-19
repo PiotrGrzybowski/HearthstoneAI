@@ -159,7 +159,8 @@ def play_start_agent():
 
     while not state.is_terminal:
         state.new_turn_for_one_player()
-        state, path = get_random_state(state)
+        # state, path = get_random_state(state)
+        state, path = get_new_state(state, evaluation_utils.passive_strategy)
         print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
         print_state(state.get_player_by_name(hero_1.name), state.get_player_by_name(hero_2.name))
         if state.is_terminal:
@@ -173,7 +174,37 @@ def play_start_agent():
 
 
 def play_start_mcts():
-    pass
+    deck1, deck2 = build_decks()
+    hero_1 = Hero(name='MCTS', cost=0, abilities=dict(), attack=0, health=20, hero_class=None)
+    hero_2 = Hero(name='Agent', cost=0, abilities=dict(), attack=0, health=20, hero_class=None)
+
+    first_player = Player(hero_1, [], deck1, [], [])
+    second_player = Player(hero_2, [], deck2, [], [])
+    state = State(first_player, second_player)
+
+    state.draw_card()
+    state.draw_card()
+    state.switch_players()
+
+    state.draw_card()
+    state.draw_card()
+    state.draw_card()
+
+    while not state.is_terminal:
+        state.new_turn_for_one_player()
+        state.switch_players()
+        state, path = perform_mcts(get_node_from_state(state))
+        print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
+        print_state(state.get_player_by_name(hero_1.name), state.get_player_by_name(hero_2.name))
+        if state.is_terminal:
+            break
+
+        state.new_turn_for_one_player()
+        state, path = get_random_state(state)
+        print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
+        print_state(state.get_player_by_name(hero_1.name), state.get_player_by_name(hero_2.name))
+
+    print_state(state.get_player_by_name(hero_1.name), state.get_player_by_name(hero_2.name))
 
 
 if __name__ == "__main__":
