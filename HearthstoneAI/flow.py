@@ -140,7 +140,7 @@ def random_playoff():
             break
 
 
-def play():
+def play_start_agent():
     deck1, deck2 = build_decks()
     hero_1 = Hero(name='Agent', cost=0, abilities=dict(), attack=0, health=20, hero_class=None)
     hero_2 = Hero(name='MCTS', cost=0, abilities=dict(), attack=0, health=20, hero_class=None)
@@ -171,5 +171,10 @@ def play():
 
     print_state(state.get_player_by_name(hero_1.name), state.get_player_by_name(hero_2.name))
 
+
+def play_start_mcts():
+    pass
+
+
 if __name__ == "__main__":
-    play()
+    play_start_agent()
