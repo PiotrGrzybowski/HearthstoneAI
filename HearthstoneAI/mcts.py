@@ -9,21 +9,25 @@ C_VALUE = 0.8
 def perform_mcts(node):
     # node['state'].switch_players()
     # node['state'].opposite_player.mana -= 1
-    for i in range(50):
+    for i in range(200):
         selected = select_node(None, node)
         win = sim(selected)
         back_propagation(selected, win)
 
     # node['state'].switch_players()
-    return get_best_child(node)
+    child = get_best_child(node)
+    return child
+
 
 def select_node(parent_node, current_node):
+    current_name = current_node['state'].current_player.hero.name
     if current_node['state'].is_terminal:
         return parent_node
 
     if not current_node['children']:
         opposite_state = deepcopy(current_node['state'])
         opposite_state.new_turn_for_one_player()
+        opposite_name = opposite_state.current_player.hero.name
         current_node['children'] = get_nodes_from_leafs(leafs=get_leafs(opposite_state), parent=current_node)
         # print('\t\tBest move can be done by {}'.format(current_node['children'][0]['state'].current_player.name))
         return current_node['children'][0]
@@ -61,8 +65,8 @@ def sim(node):
     state = deepcopy(node['state'])
     node_player = state.current_player
     while not state.is_terminal:
-        state.new_turn_for_one_player()
         state, _ = get_random_state(state)
+        state.new_turn_for_one_player()
 
     return node_player.name != state.current_player.name
 

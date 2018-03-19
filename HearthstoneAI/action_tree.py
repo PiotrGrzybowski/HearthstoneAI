@@ -7,6 +7,8 @@ from HearthstoneAI.cards import Minion
 def get_leafs(state):
     leafs = []
     walk(state, 0, state.current_player.mana, leafs)
+    leafs = set(leafs)
+    # print('hey')
     return leafs
 
 
@@ -101,13 +103,13 @@ def walk_attacks(state, leafs, lol='', path=''):
                 path += 'Attacking HERO with ' + card.name + ' -> '
                 # print(lol + 'Attacking HERO with ' + card.name)
                 new_state.attack_hero_by_ref(current_card)
-                walk_attacks(new_state, leafs, lol + '\t', path)
+                state, path = walk_attacks(new_state, leafs, lol + '\t', path)
             for opponent_card in new_state.opposite_player.board:
                 if isinstance(opponent_card, Minion) and not current_card.summoning_sickness:
                     path += 'battling ' + card.name + ' and ' + opponent_card.name + ' -> '
                     # print(lol + 'battling ' + card.name + ' and ' + opponent_card.name)
                     new_state.attack_by_ref(new_state.current_player.board[index], opponent_card)
-                    walk_attacks(new_state, leafs, lol + '\t', path)
+                    state, path = walk_attacks(new_state, leafs, lol + '\t', path)
             # newer_state = deepcopy(state)
     path += 'END'
     # print(path)
