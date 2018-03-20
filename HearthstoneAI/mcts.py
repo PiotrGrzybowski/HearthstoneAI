@@ -10,7 +10,7 @@ C_VALUE = 0.8
 def perform_mcts(node):
     # node['state'].switch_players()
     # node['state'].opposite_player.mana -= 1
-    timeout = 10
+    timeout = 20
     timeout_start = time.time()
     while time.time() < timeout_start + timeout:
         selected = select_node(None, node)
@@ -45,7 +45,7 @@ def select_node(parent_node, current_node):
 
 def get_best_child(node):
     best_node = get_best_node(node, node['children'])
-    return best_node['state'], best_node['path']
+    return best_node
 
 
 def simulation(node, new_turn=True):
