@@ -169,7 +169,7 @@ def play_start_agent_passive_vs_mcts():
         state.new_turn_for_one_player()
         # state, path = get_random_state(state)
         state, path = get_new_state(state, evaluation_utils.passive_strategy)
-        print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
+        #print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
         print_state(state.get_player_by_name(hero_1.name), state.get_player_by_name(hero_2.name))
         if state.is_terminal:
             break
@@ -183,7 +183,7 @@ def play_start_agent_passive_vs_mcts():
         best_child_losses.append(best_child['losses'])
         visited_nodes.append(start_node['wins'] + start_node['losses'])
 
-        print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
+        #print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
         print_state(state.get_player_by_name(hero_1.name), state.get_player_by_name(hero_2.name))
         turns += 1
         visited_nodes.append(start_node['wins'] + start_node['losses'])
@@ -221,7 +221,7 @@ def play_start_agent_offensive_vs_mcts():
         state.new_turn_for_one_player()
         # state, path = get_random_state(state)
         state, path = get_new_state(state, evaluation_utils.offensive_strategy)
-        print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
+        #print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
         print_state(state.get_player_by_name(hero_1.name), state.get_player_by_name(hero_2.name))
         if state.is_terminal:
             break
@@ -235,7 +235,7 @@ def play_start_agent_offensive_vs_mcts():
         best_child_losses.append(best_child['losses'])
         visited_nodes.append(start_node['wins'] + start_node['losses'])
 
-        print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
+        #print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
         print_state(state.get_player_by_name(hero_1.name), state.get_player_by_name(hero_2.name))
         turns += 1
         visited_nodes.append(start_node['wins'] + start_node['losses'])
@@ -272,7 +272,7 @@ def play_start_agent_random_vs_mcts():
     while not state.is_terminal:
         state.new_turn_for_one_player()
         state, path = get_random_state(state)
-        print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
+        #print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
         print_state(state.get_player_by_name(hero_1.name), state.get_player_by_name(hero_2.name))
         if state.is_terminal:
             break
@@ -286,7 +286,7 @@ def play_start_agent_random_vs_mcts():
         best_child_losses.append(best_child['losses'])
         visited_nodes.append(start_node['wins'] + start_node['losses'])
 
-        print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
+        #print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
         print_state(state.get_player_by_name(hero_1.name), state.get_player_by_name(hero_2.name))
         turns += 1
         visited_nodes.append(start_node['wins'] + start_node['losses'])
@@ -332,14 +332,14 @@ def start_mcts_vs_random():
         best_child_losses.append(best_child['losses'])
         visited_nodes.append(start_node['wins'] + start_node['losses'])
 
-        print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
+        #print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
         print_state(state.get_player_by_name(hero_1.name), state.get_player_by_name(hero_2.name))
         if state.is_terminal:
             break
 
         state.new_turn_for_one_player()
         state, path = get_random_state(state)
-        print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
+        #print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
         print_state(state.get_player_by_name(hero_1.name), state.get_player_by_name(hero_2.name))
 
         turns += 1
@@ -386,14 +386,14 @@ def start_mcts_vs_offensive():
         best_child_losses.append(best_child['losses'])
         visited_nodes.append(start_node['wins'] + start_node['losses'])
 
-        print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
+        #print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
         print_state(state.get_player_by_name(hero_1.name), state.get_player_by_name(hero_2.name))
         if state.is_terminal:
             break
 
         state.new_turn_for_one_player()
         state, path = get_new_state(state, evaluation_utils.offensive_strategy)
-        print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
+        #print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
         print_state(state.get_player_by_name(hero_1.name), state.get_player_by_name(hero_2.name))
 
         turns += 1
@@ -440,14 +440,14 @@ def start_mcts_vs_passive():
         best_child_losses.append(best_child['losses'])
         visited_nodes.append(start_node['wins'] + start_node['losses'])
 
-        print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
+        #print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
         print_state(state.get_player_by_name(hero_1.name), state.get_player_by_name(hero_2.name))
         if state.is_terminal:
             break
 
         state.new_turn_for_one_player()
         state, path = get_new_state(state, evaluation_utils.passive_strategy)
-        print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
+        #print("\n\nAction taken by {}: {}\n\n".format(state.current_player.name, path))
         print_state(state.get_player_by_name(hero_1.name), state.get_player_by_name(hero_2.name))
 
         turns += 1
@@ -460,7 +460,7 @@ def start_mcts_vs_passive():
 
 if __name__ == "__main__":
     print("Game")
-    games_to_play = 50
+    games_to_play = 5
     turns_list = []
     root_wins_list = []
     root_loses_list = []
@@ -470,6 +470,7 @@ if __name__ == "__main__":
     mcts_win_list = []
 
     for i in range(games_to_play):
+        print("{} game mtcs vs ranodm".format(i))
         turns, root_wins, root_loses, best_child_wins, best_child_losses, visited_nodes, mcts_win = start_mcts_vs_random()
         turns_list.append(turns)
         root_wins_list.append(root_wins)
@@ -494,6 +495,7 @@ if __name__ == "__main__":
     mcts_win_list = []
 
     for i in range(games_to_play):
+        print("{} game mtcs vs offensivem".format(i))
         turns, root_wins, root_loses, best_child_wins, best_child_losses, visited_nodes, mcts_win = start_mcts_vs_offensive()
         turns_list.append(turns)
         root_wins_list.append(root_wins)
@@ -519,6 +521,7 @@ if __name__ == "__main__":
     mcts_win_list = []
 
     for i in range(games_to_play):
+        print("{} game mtcs vs passive".format(i))
         turns, root_wins, root_loses, best_child_wins, best_child_losses, visited_nodes, mcts_win = start_mcts_vs_passive()
         turns_list.append(turns)
         root_wins_list.append(root_wins)
@@ -544,6 +547,8 @@ if __name__ == "__main__":
     mcts_win_list = []
 
     for i in range(games_to_play):
+        print("{} game passive vs mcts".format(i))
+
         turns, root_wins, root_loses, best_child_wins, best_child_losses, visited_nodes, mcts_win = play_start_agent_passive_vs_mcts()
         turns_list.append(turns)
         root_wins_list.append(root_wins)
@@ -569,7 +574,9 @@ if __name__ == "__main__":
     mcts_win_list = []
 
     for i in range(games_to_play):
-        turns, root_wins, root_loses, best_child_wins, best_child_losses, visited_nodes, mcts_win = start_mcts_vs_random()
+        print("{} game ranodom vs mcts".format(i))
+
+        turns, root_wins, root_loses, best_child_wins, best_child_losses, visited_nodes, mcts_win = play_start_agent_offensive_vs_mcts()
         turns_list.append(turns)
         root_wins_list.append(root_wins)
         root_loses_list.append(root_loses)
@@ -594,7 +601,9 @@ if __name__ == "__main__":
     mcts_win_list = []
 
     for i in range(games_to_play):
-        turns, root_wins, root_loses, best_child_wins, best_child_losses, visited_nodes, mcts_win = start_mcts_vs_random()
+        print("{} game ranodom vs mcts".format(i))
+
+        turns, root_wins, root_loses, best_child_wins, best_child_losses, visited_nodes, mcts_win = splay_start_agent_random_vs_mcts()
         turns_list.append(turns)
         root_wins_list.append(root_wins)
         root_loses_list.append(root_loses)

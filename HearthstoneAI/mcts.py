@@ -10,7 +10,7 @@ C_VALUE = 0.8
 def perform_mcts(node):
     # node['state'].switch_players()
     # node['state'].opposite_player.mana -= 1
-    timeout = 20
+    timeout = 10
     timeout_start = time.time()
     while time.time() < timeout_start + timeout:
         selected = select_node(None, node)
